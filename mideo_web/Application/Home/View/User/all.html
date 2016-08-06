@@ -1,0 +1,113 @@
+<include file="./Public/widget/head.html" title="用户管理——Mideo管理员管理系统" keywords="Mideo"/>
+<link rel="stylesheet" type="text/css" href="__CSS__/index.css">
+<link rel="stylesheet" type="text/css" href="__CSS__/admin.css">
+<include file="./Public/widget/header.html"/>
+        <include file="./Public/widget/topheader.html"/>
+        <ul id="side" class="side">
+            <include file="./Public/widget/leftnav.html"/>
+        </ul>
+        <div class="content">
+            <include file="./Public/widget/nav/user.html"/>
+            <table class="table table-border mt20">
+                <thead>
+                    <tr>
+                        <th>用户ID</th>
+                        <th>账号绑定</th>
+                        <th>用户名</th>
+                        <th>头像</th>
+                        <th>签名</th>
+                        <th>注册时间</th>
+                        <th>推荐</th>
+                        <th>删除</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <volist name="list" id="item">
+                    <tr>
+                        <td>{$item.id}</td>
+                        <td>
+                            facebook:{$item.facebook}<br/>
+                            twitter:{$item.twitter}<br/>
+                            google:{$item.google}<br/>
+                            instagram:{$item.instagram}
+                        </td>
+                        <td>{$item.username}</td>
+                        <td><img style="max-width:100px;max-height: 100px;" src="{$item.avatar|getAvatarUrl}" alt=""></td>
+                        <td>{$item.motto}</td>
+                        <td>{$item.addtime|date='Y-m-d H:i:s',###}</td>
+                        <eq name="item.isrecommend" value="0">
+                        <td><input class="js_setrecommend btn btn-success" data-id="{$item.id}" type="button" value="推荐" /></td>
+                        <else/>
+                        <td><input class="js_cancelrecommend btn btn-warning" data-id="{$item.id}" type="button" value="取消" /></td>
+                        </eq>
+                        <td><input class="js_delete btn btn-danger" data-id="{$item.id}" type="button" value="删除" /></td>
+                    </tr>
+                    </volist>
+                </tbody>
+            </table>
+            <div class="pager">{$page}</div>
+        </div>
+<include file="./Public/widget/footer.html"/>
+<script type="text/javascript">
+    $(function() {
+        initEvent();
+    });
+
+    function initEvent() {
+        $('.js_delete').click(function(e) {
+            if (confirm("确认删除？")) {
+                var id = $(this).attr('data-id');
+                $.ajax({
+                    dataType:'json',
+                    url: '__CONTROLLER__/action_delete/id/' + id
+                }).done(function(data) {
+                    if (data.code == 200) {
+                        window.location.reload();
+                    } else {
+                        alert(data.msg);
+                    }
+                }).fail(function(msg) {
+                    console.error(msg);
+                    alert('操作失败');
+                });
+            }
+        });
+
+        $('.js_setrecommend').click(function(e) {
+            var id = $(this).attr('data-id');
+            $.ajax({
+                dataType:'json',
+                url: '__CONTROLLER__/action_setrecommend/id/' + id
+            }).done(function(data) {
+                if (data.code == 200) {
+                    window.location.reload();
+                } else {
+                    alert(data.msg);
+                }
+            }).fail(function(msg) {
+                console.error(msg);
+                alert('操作失败');
+            });
+        });
+
+        $('.js_cancelrecommend').click(function(e) {
+            if (confirm("确认取消推荐？")) {
+                var id = $(this).attr('data-id');
+                $.ajax({
+                    dataType:'json',
+                    url: '__CONTROLLER__/action_cancelrecommend/id/' + id
+                }).done(function(data) {
+                    if (data.code == 200) {
+                        window.location.reload();
+                    } else {
+                        alert(data.msg);
+                    }
+                }).fail(function(msg) {
+                    console.error(msg);
+                    alert('操作失败');
+                });
+            }
+        });
+    }
+</script>
+<include file="./Public/widget/foot.html"/>

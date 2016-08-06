@@ -1,0 +1,117 @@
+html,body,div,dl,dt,dd,ul,h1,h2,h3,pre,form,label,fieldset,input,p,blockquote,th,td { margin:0; padding:0; }
+table { border-collapse:collapse; border-spacing:0; }
+fieldset, img { border:0; }
+ul { list-style:none }
+      body,html{font-size: 12px;height: 100%;width: 100%;font-family: Helvetica,arial,nimbussansl,liberationsans,freesans,clean,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";}
+      /*video{height: 100%}*/
+        .wrap{background: transparent;
+            width: 20.67rem;
+            margin:0 auto; 
+            padding-top: 0rem;
+            
+            }
+
+
+        .app_lang{ padding-top: 1rem;width: 3.8rem;height: 2rem;margin:0 0 0 auto;background-size:cover;color: #fff;font-size: 0.6rem;}
+
+        .app_lang .icon{display: inline-block; width: 0.6rem;height: 0.6rem;margin:0 0 0 auto;background: url('../img/yuyan.png');background-size:cover;top: 0.05rem;position: relative;margin-right: 0.1rem}
+        
+        .app_lang div{padding-left: 0.2rem;-moz-border-radius: 3px;  -webkit-border-radius: 3px;  border-radius:3px;}
+        .app_lang div:hover{background-color: #AAAAAA;cursor: pointer;}
+        .clang{display: none}
+
+      
+        .video_bg{position: fixed;width: 100%;height:100%;}
+        .mask{position: absolute;width: 100%;height:100%;background: black;opacity: 0.4}
+        .app_logo{width: 4rem;height: 4rem;margin:0rem auto 0 auto;background: url('../img/x_5_3.png');background-size:cover }
+        .context{width: 100%;height: 3rem;margin: 0.5rem auto 0 auto;text-align: center}
+        .context p{padding: 0.12rem;font-size: 1rem;font-weight:bold;margin: 0;color:#FFD700;}
+        .context p:last-child{font-size: 0.7rem;font-weight: normal;color:#FFD700}
+        .reminder{font-size:0.5rem;color:#fff;text-align:center;margin-bottom:1.5rem;}
+        .fade{display:none;}
+      /*  .wrap .logo{display: block;width: 8.17rem;height: 2.42rem;margin: 0.5rem auto 0 auto;background: url('../img/en-play-badge.png');background-size:cover }*/
+
+        .wrap .logo{display: block;width: 10rem;height: 2.42rem;margin: 0.5rem auto 0 auto;background-color: black;background-size:cover ;-moz-border-radius: 10px;      /* Gecko browsers */
+    -webkit-border-radius: 10px;   /* Webkit browsers */
+    border-radius:10px;            /* W3C syntax */}
+        .wrap .logo .icon1{float: left; display:inline-block;width:1.3rem;height:1.4rem;margin-top:0.6rem ;margin-left:0.4rem;margin-right: 0.2rem; background: url('../img/play-logo.png');background-size:cover }
+        .wrap .logo .icon2{float: left; display:inline-block;width:1.3rem;height:1.4rem;margin-top:0.6rem ;margin-left:0.4rem;margin-right: 0.2rem; background: url('../img/android.png');background-size:cover }
+
+        .wrap .logo .right{float: left;color: #fff ;width: 8rem; height: 2.2rem;font-size: 1.3rem;text-align: center;}
+        .wrap .logo .right .up{font-size: 0.6rem;text-align: left;margin-top: 0.1rem;color:#F4F4F4;font-family:Arial,Verdana,Sans-serif;padding-left:0.5rem; }
+        .wrap .logo .right .down{font-size: 1.3rem;text-align: center;}
+        .wrap ul{list-style: none;display: block;width:7.8rem;height: 2.6rem;margin:1.2rem auto 0 auto;}
+        .wrap ul li{float:left;margin: 0.3rem;width: 2rem;height: 2rem;}
+        .wrap ul li:first-child{background: url('../img/fa.png');background-size: cover;}
+        .wrap ul li:nth-child(2){background: url('../img/tw.png');background-size: cover;}
+        .wrap ul li:last-child{background: url('../img/ins.png');background-size: cover;}
+        .wrap li:hover{cursor: pointer;}
+        .wrap li a{width: 2rem;height: 2rem;}
+     
+
+      @media all and (orientation : portrait){
+      /*video{width: 100%;}*/
+       
+    .video_bg{
+        position:fixed;
+            z-index: -9999;
+                width: 100%;
+               background: #469BD4;
+                }
+    }
+      @media all and (orientation : landscape){
+     
+    .video_bg{background: #A900B1;
+        position: fixed;
+            right: 0;
+            bottom:0;
+            z-index: -9999;
+                width: 100%;
+                height: 100%;}
+      
+    }
+
+      /* Custom, iPhone Retina */ 
+@media only screen and (min-width : 320px) and (orientation : portrait)  {
+     html{font-size:  100%;}
+}
+
+@media only screen and (min-width : 360px) and (orientation : portrait)  {
+     html{font-size:  125%;}
+}
+@media only screen and (min-width : 400px) and (orientation : portrait)  {
+     html{font-size:  150%;}
+}
+/* Extra Small Devices, Phones */ 
+@media only screen and (min-width : 600px) and (orientation : portrait)  {
+     html{font-size:  200%;}
+}
+
+/* Small Devices, Tablets */
+
+@media only screen and (max-width : 768px) and (orientation : portrait) {
+     
+     .wrap{width: 90%}
+}
+@media only screen and (max-width : 800px) and (orientation :landscape) {
+     
+   
+}
+@media only screen and (min-width : 480px) and (orientation : landscape) {
+     html{font-size:100%;}
+}
+@media only screen and (min-width : 580px) and (orientation : landscape) {
+     html{font-size:107%;}
+}
+@media only screen and (min-width : 730px) and (orientation :landscape) {
+     html{font-size:130%;}
+}
+@media only screen and (min-width : 900px) and (orientation :landscape) {
+     html{font-size:175%;}
+}
+/* Medium Devices, Desktops */
+@media only screen and (min-width : 992px){
+     html{font-size:200%;}
+     
+}
+/* Large Devices, Wide Screens */

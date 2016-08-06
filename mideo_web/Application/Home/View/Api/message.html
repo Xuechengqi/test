@@ -1,0 +1,159 @@
+<include file="./Public/widget/head.html" title="Api——Mideo管理员管理系统" keywords="Mideo"/>
+<link rel="stylesheet" type="text/css" href="__CSS__/index.css">
+<link rel="stylesheet" type="text/css" href="__CSS__/admin.css">
+<include file="./Public/widget/header.html"/>
+        <include file="./Public/widget/topheader.html"/>
+        <ul id="side" class="side">
+            <include file="./Public/widget/leftnav.html"/>
+        </ul>
+        <div class="content">
+            <include file="./Public/widget/nav/api.html"/>
+            <p class="mt20 mb20">baseurl: {$null|getApiBaseUrl}/message/&nbsp;&nbsp;token<span class="tcred">(所有API请求必须添加此参数)</span>: {$null|getToken}</p>
+            <table class="table table-border">
+                <thead>
+                    <tr>
+                        <th>api</th>
+                        <th>参数</th>
+                        <th>返回值</th>
+                        <th>备注</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><a href="{$null|getApiBaseUrl}/message/getsummary/userid/1/country/US" target="_blank">getsummary</a></td>
+                        <td>
+                        userid(<span class="tcred">必须</span>)<br/>
+                        country(默认US<span class="tcred">必须</span>)
+                        </td>
+                        <td><pre class="apicode">
+{
+    "code": 200,
+    "message": "",
+    "data": [
+        {
+            "msgtype": "like",
+            "count": "24"
+        },
+        {
+            "msgtype": "attention",
+            "count": "17"
+        },
+        {
+            "msgtype": "comment",
+            "count": "17"
+        },
+        {
+            "count": "3",
+            "msgtype": "system"
+        },
+        {
+            "msgtype": "at",
+            "count": 0
+        }
+    ]
+}</pre></td>
+                        <td>获取用户未读消息数量</td>
+                    </tr>
+                    <tr>
+                        <td><a href="{$null|getApiBaseUrl}/message/getmsgs/userid/1/page/1/msgtype/attention" target="_blank">getmsgs</a></td>
+                        <td>
+                        userid(<span class="tcred">必须</span>)<br/>
+                        page(<span class="tcred">必须</span>)<br/>
+                        msgtype(like,comment,at,attention之一<span class="tcred">必须</span>)
+                        </td>
+                        <td><pre class="apicode">
+{
+    "code": 200,
+    "message": "",
+    "data": [
+        {
+            "id": "40",
+            "fromuserid": "6",
+            "eventtype": "4",
+            "video_id": "af9dab11-4fc8-48c1-a6bc-f74ef7834e73",
+            "commentid": "0",
+            "isread": "0",
+            "addtime": "1458694405"
+        },
+        ...
+    ]
+}</pre></td>
+                        <td>获取用户消息</td>
+                    </tr>
+                    <tr>
+                        <td><a href="{$null|getApiBaseUrl}/message/getsystemmsgs/userid/1/page/1/msgtype/system" target="_blank">getsystemmsgs</a></td>
+                        <td>
+                        userid(<span class="tcred">必须</span>)<br/>
+                        page(<span class="tcred">必须</span>)<br/>
+                        country(默认US<span class="tcred">必须</span>)
+                        </td>
+                        <td><pre class="apicode">
+{
+    "code": 200,
+    "message": "",
+    "data": [
+        {
+            "id": "1",
+            "content": "xxx",
+            "addtime": "1458619929",
+            "isread": 1,
+            "baseurl": "http://mideo.local.com",
+            "click": 1,
+            "actionurl": "http://www.mideo.cc"
+        },
+        ...
+    ]
+}</pre></td>
+                        <td>获取系统消息</td>
+                    </tr>
+                    <tr>
+                        <td><a href="{$null|getApiBaseUrl}/message/read" target="_blank">read</a></td>
+                        <td>
+                        userid(<span class="tcred">必须</span>)<br/>
+                        msgtype(<span class="tcred">必须</span>)
+                        </td>
+                        <td><pre class="apicode">
+{
+    "code": xxx,
+    "message": ""
+}</pre></td>
+                        <td>用户某类消息设为已读</td>
+                    </tr>
+                    <tr>
+                        <td><a href="{$null|getApiBaseUrl}/message/delete" target="_blank">delete</a></td>
+                        <td>
+                        userid(<span class="tcred">必须</span>)<br/>
+                        msgid(多个用英文逗号隔开<span class="tcred">必须</span>)
+                        </td>
+                        <td><pre class="apicode">
+{
+    "code": xxx,
+    "message": ""
+}</pre></td>
+                        <td>删除用户消息</td>
+                    </tr>
+                    <tr>
+                        <td><a href="{$null|getApiBaseUrl}/message/readsystem" target="_blank">readsystem</a></td>
+                        <td>
+                        userid(<span class="tcred">必须</span>)<br/>
+                        msgid(<span class="tcred">必须</span>)
+                        </td>
+                        <td><pre class="apicode">
+{
+    "code": xxx,
+    "message": ""
+}</pre></td>
+                        <td>系统消息设为已读</td>
+                    </tr>
+                    <tr>
+                      <td><a href="{$null|getApiBaseUrl}/message/newmsgnum/token/{$null|getToken}" target="_blank">newmsgnum</a></td>
+                      <td>userid（字符串，<span class="tcred">必须</span>）</td>
+                      <td><pre class="apicode">
+    {"code":200,"message":"","data":"2"}</pre></td>
+                      <td>用户新消息数</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+<include file="./Public/widget/footer.html"/>
+<include file="./Public/widget/foot.html"/>

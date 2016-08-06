@@ -1,0 +1,135 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Mideo-Make your own show</title>
+  <link href="/favicon.ico" rel="icon" type="image/ico" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=0,minimal-ui">
+  <meta name="full-screen" content="yes">
+  <meta name="x5-fullscreen" content="true">
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="browsermode" content="application">
+  <meta name="x5-page-mode" content="app">
+  <link rel="stylesheet" href="../../index/css/main.css" />
+</head>
+<body>
+<div class="video_bg">
+<div class="mask"></div>
+</div>
+<div class="wrap">
+
+  <div class="app_lang">
+    <div><span class="icon"></span><span class="show_lang">Português</span></div>
+    <div class="clang" data-lang='br'>Português</div>
+    <div class="clang" data-lang='en'>English</div>
+  </div>
+
+  <div class="app_logo"></div>
+  <div class="context">
+    <p class="">Mideo</p>
+    <p class="lang_0">fazer o vídeo mostra,fazer amigos</p>
+  </div>
+  <a href="https://play.google.com/store/apps/details?id=com.mideo&referrer=utm_source%3Dofficialwebsite" class="logo">
+    <span class="icon1"></span>
+    <div class="right">
+      <div class="up lang_1">DISPONíVEL NO</div>
+      <div class="down" >Google Play</div>
+    </div>
+  </a>
+
+
+  <ul>
+  <li class="c1"><a class="fb" href="###"></a></li>
+  <li class="c2"><a class="tw" href="###"></a></li>
+  </ul>
+</div>
+<script src="js/jquery-2.2.2.min.js"></script>
+<script src="../../index/js/main.js"></script>
+</body>
+</html>
+
+<script type="text/javascript">
+function getCookie(c_name){
+  if (document.cookie.length>0){
+    c_start=document.cookie.indexOf(c_name + "=")
+    if (c_start!=-1){
+      c_start=c_start + c_name.length+1
+      c_end=document.cookie.indexOf(";",c_start)
+      if (c_end==-1) c_end=document.cookie.length
+      return unescape(document.cookie.substring(c_start,c_end))
+    }
+  }
+  return ""
+}
+
+function setCookie(c_name,value,expiredays){
+  var exdate=new Date()
+  exdate.setDate(exdate.getDate()+expiredays)
+  document.cookie=c_name+ "=" +escape(value)+
+  ((expiredays==null) ? "" : ";expires="+exdate.toGMTString())
+}
+
+function getLang(){
+  var lang='br';
+  var co_lang = getCookie('lang');
+  if(co_lang != "")
+    lang = co_lang;
+  return lang;
+}
+
+function changeLang(lang){
+  var data={
+    'en':[
+      'Make video show, make friends',
+      'Get it on',
+      'download'
+      ],
+    'br':[
+      'fazer o vídeo mostra,fazer amigos',
+      'DISPONíVEL NO',
+      'baixar'
+      ]};
+  var v = data[lang];
+  for (var i = 0; i < v.length; i++) {
+    $('.lang_'+i).html(v[i])
+  }
+  setCookie('lang',lang,10)
+
+  var dom = $('.clang[data-lang="'+lang+'"]');
+  $('.show_lang').html(dom.html())
+}
+
+
+$(function(){
+  $(".c1").click(function(){
+      window.location.href="https://www.facebook.com/mideoshow";
+  })
+  $(".c2").click(function(){
+      window.location.href="https://twitter.com/mideotv";
+  })
+
+  if(getLang()!='br'){
+    changeLang(getLang())
+  }
+
+
+  $('.app_lang').click(function(){
+    $('.clang').show();
+  })
+
+  $('.clang').click(function(event){
+    $('.clang').hide();
+    var c_lang=$(this).attr('data-lang');
+    if(c_lang != getLang()){
+      changeLang(c_lang)
+    }
+    event.stopPropagation();
+
+  });
+
+});
+
+</script>
+
+

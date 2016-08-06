@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>工具组控制台</title>
+    <style type="text/css">
+        .container{
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #F5F5F5;
+        }
+        .form-item{
+            margin: 10px 0;
+            line-height: 30px;
+        }
+        .item-title{
+            display: inline-block;
+            width: 80px;
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>当前app版本:<span><a target="_blank" href="__APP__/Api/version/code/{$app_ini.VERSION}">{$app_ini.VERSION}</a></span></h2>
+        <form class="form" action="__CONTROLLER__/action_update" enctype="multipart/form-data" method="post">
+            <!-- <div class="form-item">
+                <label class="item-title">新APK：</label>
+                <input type="file" required="" name="app" placeholder="app" />
+            </div> -->
+            <div class="form-item">
+                <label class="item-title">版本号：</label>
+                <input type="number" min="{$app_ini.VERSION}" max="100" required="" name="version" placeholder="version" />
+            </div>
+            <div class="form-item">
+                <label class="item-title">&nbsp;</label>
+                <input type="submit" value="更新"/>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

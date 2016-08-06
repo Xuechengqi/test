@@ -1,0 +1,165 @@
+<include file="./Public/widget/head.html" title="Api——Mideo管理员管理系统" keywords="Mideo"/>
+<link rel="stylesheet" type="text/css" href="__CSS__/index.css">
+<link rel="stylesheet" type="text/css" href="__CSS__/admin.css">
+<include file="./Public/widget/header.html"/>
+        <include file="./Public/widget/topheader.html"/>
+        <ul id="side" class="side">
+            <include file="./Public/widget/leftnav.html"/>
+        </ul>
+        <div class="content">
+            <include file="./Public/widget/nav/api.html"/>
+            <p class="mt20 mb20">baseurl: {$null|getApiBaseUrl}/video/&nbsp;&nbsp;token<span class="tcred">(所有API请求必须添加此参数)</span>: {$null|getToken}</p>
+            <table class="table table-border">
+            	<thead>
+            		<tr>
+            			<th>api</th>
+            			<th>参数</th>
+            			<th>返回值</th>
+            			<th>备注</th>
+            		</tr>
+            	</thead>
+	            <tbody>
+                    <tr>
+                        <td><a href="{$null|getApiBaseUrl}/video/get/token/{$null|getToken}/id/163cfc89-e589-4e60-8ae8-09e56c117822" target="_blank">get</a></td>
+                        <td>id（其实是uuid，<span class="tcred">必须</span>）<br/>
+                  userid（字符串，可选）
+                        </td>
+                        <td><pre class="apicode">
+{
+    code: 200,
+    message: "",
+    data: {
+        topic_title: "Um animal de estimação",
+        topic_content: "Um animal de estimação",
+        topic_picture: "topic/BR/201605/57305a0dc98f7.jpg",
+        userid: "179",
+        topicid: "29",
+        description: "Como dizer hotpot em português? ",
+        thumb: "http://uploads.mideo.cc/201605/18/11/2016-05-18/573d298c65d6f.png",
+        filepath: "http://uploads.mideo.cc/201605/18/11/2016-05-18/573d298c69084.mp4",
+        duration: "11",
+        size: "2828",
+        likecount: "3",
+        commentcount: "5",
+        createtime: "1463626124",
+        avatar: "https://graph.facebook.com/1770935633135983/picture?height=150&width=150&migration_overrides=%7Boctober_2012%3Atrue%7D",
+        username: "XianZhao",
+        uuid: "6218b86943fa13be",
+        tags: [
+            {
+                tag_id: "30",
+                title: "Cantar UMA canção",
+                content: "Cantar UMA canção"
+            },
+            {
+                tag_id: "29",
+                title: "Um animal de estimação",
+                content: "Um animal de estimação"
+            },
+            {
+                tag_id: "28",
+                title: " vamos perder peso",
+                content: " vamos perder peso"
+            },
+            {
+                tag_id: "27",
+                title: "Truque para seus amigos",
+                content: "Truque para seus amigos"
+            }
+        ],
+        attention: 0,
+        like: 0
+    }
+}</pre></td>
+                        <td>获取视频数据</td>
+                    </tr>
+                    <tr>
+                        <td><a href="{$null|getApiBaseUrl}/video/getcomments/token/{$null|getToken}/id/163cfc89-e589-4e60-8ae8-09e56c117822" target="_blank">getcomments</a></td>
+                        <td>id（其实是uuid，<span class="tcred">必须</span>）<br/>
+                        page（<span class="tcred">必须</span>）<br/>
+                        userid（字符串，可选）
+                        </td>
+                        <td><pre class="apicode">
+{
+  "code": 200,
+  "message": "",
+  "data": [
+    {
+      "id": "1",
+      "videoid": "163cfc89-e589-4e60-8ae8-09e56c117822",
+      "userid": "1",
+      "username": "atwal",
+      "content": "good good good",
+      "avatar": "xxx/avatar/201603/03/01/2016-03-03/56d82e7b58744.png",
+      "createtime": "1456911082"
+    }...
+  ]
+}</pre></td>
+                        <td>获取视频评论</td>
+                    </tr>
+                    <tr>
+                        <td><a href="{$null|getApiBaseUrl}/video/getlikeusers/token/{$null|getToken}/id/163cfc89-e589-4e60-8ae8-09e56c117822" target="_blank">getlikeusers</a></td>
+                        <td>id（其实是uuid，<span class="tcred">必须</span>）<br/>
+                        myid（当前用户id，<span class="tcred">必须</span>）<br/>
+                        page（<span class="tcred">必须</span>）<br/>
+                        </td>
+                        <td><pre class="apicode">
+{
+  "code": 200,
+  "message": "",
+  "data": [
+    {
+        id: "36",
+        username: "Zach Lawess",
+        avatar: "http://uploads.mideo.cc/avatar/36.jpg",
+        createtime: "1462813251",
+        attention: 0
+    }...
+  ]
+}</pre></td>
+                        <td>获取视频点赞列表</td>
+                    </tr>
+                    <tr>
+                        <td><a href="{$null|getApiBaseUrl}/video/report" target="_blank">report</a></td>
+                        <td>videoid(<span class="tcred">必须</span>)<br/>userid<br/>content</td>
+                        <td><pre class="apicode">
+{
+    "code":xxx（状态码）,
+    "message":""
+}</pre></td>
+                        <td>举报视频</td>
+                    </tr>
+                    <tr>
+                        <td><a href="{$null|getApiBaseUrl}/video/delete" target="_blank">delete</a></td>
+                        <td>videoid(<span class="tcred">必须</span>)<br/>userid(<span class="tcred">必须</span>)</td>
+                        <td><pre class="apicode">
+{
+    "code":xxx（状态码）,
+    "message":""
+}</pre></td>
+                        <td>删除视频</td>
+                    </tr>
+                    <tr>
+                        <td><a href="{$null|getApiBaseUrl}/video/add" target="_blank">add</a></td>
+                        <td>
+                        userid(<span class="tcred">必须</span>)<br/>
+                        duration(<span class="tcred">必须</span>)<br/>
+                        thumb(<span class="tcred">必须</span>)<br/>
+                        video(<span class="tcred">必须</span>)<br/>
+                        country(默认为美国US，<span class="tcred">必须</span>)<br/>
+                        cateid(默认为1，可选)<br/>
+                        description(可选)<br/>
+                        topicid(可选)<br/>
+                        </td>
+                        <td><pre class="apicode">
+{
+    "code":xxx（状态码）,
+    "message":""
+}</pre></td>
+                        <td>上传视频</td>
+                    </tr>
+	            </tbody>
+            </table>
+        </div>
+<include file="./Public/widget/footer.html"/>
+<include file="./Public/widget/foot.html"/>

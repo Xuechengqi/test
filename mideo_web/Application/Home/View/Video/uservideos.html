@@ -1,0 +1,340 @@
+<include file="./Public/widget/head.html" title="用户视频——Mideo管理员管理系统" keywords="Mideo"/>
+<link rel="stylesheet" type="text/css" href="__CSS__/index.css">
+<link rel="stylesheet" type="text/css" href="__CSS__/admin.css">
+<include file="./Public/widget/header.html"/>
+        <include file="./Public/widget/topheader.html"/>
+        <ul id="side" class="side">
+            <include file="./Public/widget/leftnav.html"/>
+        </ul>
+        <div class="content">
+            <include file="./Public/widget/nav/video.html"/>
+            <table class="table table-border mt20">
+                <thead>
+                    <tr>
+                        <th>视频ID</th>
+                        <th>国家</th>
+                        <th>缩略图</th>
+                        <th>标签</th>
+                        <th>点赞量</th>
+                        <th class="sort_playcount">播放数</th>
+                        <th>描述</th>
+                        <th>其它信息</th>
+                        <th>用户</th>
+                        <th>评论数</th>
+                        <th>喜欢数</th>
+                        <th>热门</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <volist name="list" id="item">
+                    <tr>
+                        <td><a title="点击播放" href="__CONTROLLER__/play/id/{$item.id}">{$item.id}</a></td>
+                        <td>{$item.country|getCountryName}</td>
+                        <td>
+                        <empty name="item.thumb">
+                        <img class="video-thumb" data-id="{$item.id}" style="max-width:100px;max-height: 100px;" src="{$null|getBaseUrl}/uploads/default.png" alt="">
+                        <else />
+                        <img class="video-thumb" data-id="{$item.id}" style="max-width:100px;max-height: 100px;" src="{$null|getBaseUrl}/uploads/{$item.thumb}" alt="">
+                        </empty>
+                        </td>
+                        <td>
+                            <eq name="item.istopic" value="0">
+                            {$item.tags}<br/>
+                            <else />
+                            <a href="__APP__/Topic/show/id/{$item.topicid}">{$item.topicid}</a><br/><br/>
+                            </eq>
+                            <a data-id="{$item.id}" data-istopic="{$item.istopic}" data-cid="{$item.topicid}" data-country="{$item.country}" class="video-tag">修改</a>
+                        </td>
+                        <td><span>{$item.likecount}</span><br/><a data-id="{$item.id}" class="add_vlike">增加</a></td>
+                        <td><span>{$item.playcount}</span><br/><a data-id="{$item.id}" class="add_pcount">增加</a></td>
+                        <td>{$item.description|cutStr=###, 20}</td>
+                        <td>
+                            时长：{$item.duration}<br/>
+                            大小：{$item.size|formatBytes}<br/>
+                            发布时间：{$item.createtime|date='Y-m-d H:i',###}<br/>
+                            锁定权重：{$item.orderfixed}<br/>
+                        </td>
+                        <td><span style="color:red">({$item.userid})</span>&nbsp;{$item.username}</td>
+                        <td>{$item.commentcount}</td>
+                        <td>{$item.likecount}</td>
+                        <td>
+                            <select data-id="{$item.id}" class = "hot_act">
+                                <option value="0" <eq name="item.ishot" value="0">selected="selected"</eq>> 非热门</option>
+                                <option value="1" <eq name="item.ishot" value="1">selected="selected"</eq>> 热门</option>
+                                <option value="2" <eq name="item.ishot" value="2">selected="selected"</eq>> 不显示</option>
+                            </select>
+                        </td>
+                    </tr>
+                    </volist>
+                </tbody>
+            </table>
+            <div class="pager">{$page}</div>
+        </div>
+        <div id="test" style="display: none;"><label for="male">增加数：</label><input name="num" value="" /></div>
+<include file="./Public/widget/footer.html"/>
+<script type="text/javascript" src="__JS__/video.js"></script>
+<script type="text/javascript" src="__JS__/Idialog.js"></script>
+<script type="text/javascript">
+    $(function() {
+        initEvent();
+        bindChangeVideoThumb('__CONTROLLER__');
+        bindChangeVideoTopic('__CONTROLLER__');
+    });
+
+    function initEvent() {
+        $(".add_pcount").click(function(){
+            var videoid = $(this).attr("data-id");
+            var sp = $(this).parent().find('span');
+            var o_num = parseInt(sp.html());
+
+            var d = Idialog({
+                top:200,
+                width:300,
+                title:"增加播放数",
+                content:$('#test'),
+                init:function(body){
+                },
+                ok:function(obj){
+                    var num = obj._self.find("input").val();
+                    if(num==""){
+                        alert("不能为空！");
+                        return false;
+                    }
+                    if(isNaN(num)){
+                       alert("不是数字");
+                       return false;
+                    }
+                    if(num<1){
+                       alert("不能为负数");
+                       return false;
+                    }
+
+                    $.ajax({
+                        dataType:'json',
+                        url: '__CONTROLLER__/action_addPlayCount/videoid/' + videoid + '/num/' + num
+                    }).done(function(data) {
+                        if (data.code == 200) {
+                            sp.html(parseInt(data.data) +o_num);
+                        } else {
+                            alert(data.msg);
+                        }
+                    }).fail(function(msg) {
+                        alert('操作失败');
+                    });
+                    return true;
+                },
+                cancel:false
+            });
+        });
+
+        $(".sort_playcount").click(function(e) {
+            var location = window.location.href;
+            if (location.indexOf("/sort/up") !== -1) {
+                location = location.replace("/sort/up", "/sort/down");
+            } else if (location.indexOf("/sort/down") !== -1) {
+                location = location.replace("/sort/down", "/sort/up");
+            } else {
+                location += "/sort/down";
+            }
+            location.replace("//", "/");
+            window.location.href = location;
+        });
+
+        $(".add_vlike").click(function(){
+            var videoid = $(this).attr("data-id");
+            var sp = $(this).parent().find('span');
+            var o_num = parseInt(sp.html());
+
+            var d = Idialog({
+                top:200,
+                width:300,
+                title:"增加赞数",
+                content:$('#test'),
+                init:function(body){
+                },
+                ok:function(obj){
+                    var num = obj._self.find("input").val();
+                    if(num==""){
+                        alert("不能为空！");
+                        return false;
+                    }
+                    if(isNaN(num)){
+                       alert("不是数字");
+                       return false;
+                    }
+                    if(num>20){
+                       alert("一次不能多于20个赞");
+                       return false;
+                    }
+                    if(num<1){
+                       alert("不能为负数");
+                       return false;
+                    }
+
+                    $.ajax({
+                        dataType:'json',
+                        url: '__CONTROLLER__/action_addVlike/videoid/' + videoid + '/num/' + num
+                    }).done(function(data) {
+                        if (data.code == 200) {
+                            sp.html(parseInt(data.data) +o_num);
+                        }
+                        alert(data.msg);
+                    }).fail(function(msg) {
+                        alert('操作失败');
+                    });
+                    return true;
+                },
+                cancel:false
+            });
+        });
+
+        $('.hot_act').change(function(e) {
+            var id = $(this).attr('data-id');
+            var v = $(this).val();
+            console.log(v);
+            $.ajax({
+                dataType:'json',
+                url: '__CONTROLLER__/action_sethot/id/'+id+'/v/'+v
+            }).done(function(data) {
+                if (data.code == 200) {
+                } else {
+                    alert(data.msg);
+                    window.location.reload();
+                }
+            }).fail(function(msg) {
+                console.error(msg);
+                alert('操作失败');
+                window.location.reload();
+            });
+        });
+
+
+        $('.js_topic').click(function(e) {
+            var id = $(this).attr('data-id');
+            $.ajax({
+                dataType:'json',
+                url: '__CONTROLLER__/action_topic/id/' + id + '/val/1'
+            }).done(function(data) {
+                if (data.code == 200) {
+                    window.location.reload();
+                } else {
+                    alert(data.msg);
+                }
+            }).fail(function(msg) {
+                console.error(msg);
+                alert('操作失败');
+            });
+        });
+
+        $('.js_canceltopic').click(function(e) {
+            var id = $(this).attr('data-id');
+            $.ajax({
+                dataType:'json',
+                url: '__CONTROLLER__/action_topic/id/' + id + '/val/0'
+            }).done(function(data) {
+                if (data.code == 200) {
+                    window.location.reload();
+                } else {
+                    alert(data.msg);
+                }
+            }).fail(function(msg) {
+                console.error(msg);
+                alert('操作失败');
+            });
+        });
+
+        $('.js_order_top').click(function(e) {
+            var id = $(this).attr('data-id');
+            $.ajax({
+                dataType:'json',
+                url: '__CONTROLLER__/action_ordertop/id/' + id
+            }).done(function(data) {
+                if (data.code == 200) {
+                    window.location.reload();
+                } else {
+                    alert(data.msg);
+                }
+            }).fail(function(msg) {
+                console.error(msg);
+                alert('操作失败');
+            });
+        });
+
+
+        $(".video-tag").click(function(){
+            var videoid = $(this).attr("data-id");
+            var cid = $(this).attr("data-cid");
+            var istopic = $(this).attr("data-istopic");
+            var country = $(this).attr("data-country");
+            var url = '__CONTROLLER__/tagHtmlRadio/videoid/' + videoid +'/country/' + country;
+            if (istopic == 0) {
+                url = '__CONTROLLER__/tagHtml/videoid/' + videoid +'/country/' + country;
+            }
+            var d = Idialog({
+                top:200,
+                width:500,
+                title:"首页显示标签",
+                content:'',
+                init:function(body){
+                    body.html("加载中。。。");
+                    $.ajax({
+                        dataType:'html',
+                        url: url
+                    }).done(function(html) {
+                        body.html(html);
+                        body.find("[name='tag']").each(function(index, element) {
+                            if($(this).val()==cid){
+                                $(this).attr("checked","checked");
+                            }
+                        });
+
+                    }).fail(function(msg) {
+                        alert('加载失败');
+                    });
+                },
+                ok:function(obj){
+                    if (istopic == 1) {
+                        var tag_id = obj._self.find("[name='tag']:checked").val();
+                        if(tag_id){
+                            $.ajax({
+                                dataType:'json',
+                                url: '__CONTROLLER__/tag_save_r/videoid/' + videoid + '/tag_id/' + tag_id
+                            }).done(function(data) {
+                                if (data.code == 200) {
+                                    location.reload();
+                                }
+                            }).fail(function(msg) {
+                                alert('操作失败');
+                            });
+                        }
+                    } else {
+                        var tags = [];
+                        obj._self.find("[name='tag']:checked").each(function(index, element) {
+                            tags.push($(this).val())
+                        });
+                        tags=tags.join(',');
+                        if(tags){
+                            $.ajax({
+                                dataType:'json',
+                                url: '__CONTROLLER__/tag_save/videoid/' + videoid + '/tags/' + tags
+                            }).done(function(data) {
+                                if (data.code == 200) {
+                                    location.reload();
+                                }
+                            }).fail(function(msg) {
+                                alert('操作失败');
+                            });
+                        }
+                    }
+                    return false;
+                },
+                cancel:false
+            });
+        });
+
+
+
+
+    }
+</script>
+<include file="./Public/widget/foot.html"/>

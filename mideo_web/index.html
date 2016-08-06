@@ -1,0 +1,252 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Mideo:Grave o melhor momento</title>
+  <link href="/favicon.ico" rel="icon" type="image/ico" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=0,minimal-ui">
+  <meta name="full-screen" content="yes">
+  <meta name="x5-fullscreen" content="true">
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="browsermode" content="application">
+  <meta name="x5-page-mode" content="app">
+  <link rel="stylesheet" href="./index/css/main.css" />
+  <script>
+    window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+    ga('create', 'UA-77132610-2', 'auto');
+  </script>
+  <script async src='//www.google-analytics.com/analytics.js'></script>
+</head>
+<body>
+<div class="video_bg">
+<div class="mask"></div>
+</div>
+<div class="wrap">
+
+  <div class="app_lang">
+    <div><span class="icon"></span><span class="show_lang">Português</span></div>
+    <div class="clang" data-lang='br'>Português</div>
+    <div class="clang" data-lang='en'>English</div>
+    <div class="clang" data-lang='es'>Español</div>
+  </div>
+
+  <div class="app_logo"></div>
+  <div class="context">
+    <p class="">Mideo</p>
+    <p class="lang_0">fazer o vídeo mostra,fazer amigos</p>
+  </div>
+  <div class="reminder fade">
+    <p class="hint lang_3"></p>
+  </div>
+  <a href="javascript:void(0);" class="logo ga_logo">
+    <span class="icon1"></span>
+    <div class="right">
+      <div class="up lang_1">DISPONíVEL NO</div>
+      <div class="down" >Google Play</div>
+    </div>
+  </a>
+  <a href="javascript:void(0);" class="logo ga_apk">
+    <span class="icon2"></span>
+    <div class="right" style="text-align: center;">
+      <div class="lang_2" style="margin-top: 0.5rem;">baixar</div>
+    </div>
+  </a>
+
+
+  <ul>
+  <li class="c1"><a class="fb" href="###"></a></li>
+  <li class="c2"><a class="tw" href="###"></a></li>
+  <li class="c3"><a class="ins" href="###"></a></li>
+  </ul>
+</div>
+<iframe id="l" width="1" height="1" style="visibility:hidden"></iframe>
+<script src="./index/js/jquery-2.2.2.min.js"></script>
+<script src="./index/js/main.js"></script>
+</body>
+</html>
+
+<script type="text/javascript">
+
+var appTopicUrl = "mideo://topic";
+var appVideoUrl = "mideo://video";
+var appMainUrl = "mideo://main";
+
+function getCookie(c_name){
+  if (document.cookie.length>0){
+    c_start=document.cookie.indexOf(c_name + "=")
+    if (c_start!=-1){
+      c_start=c_start + c_name.length+1
+      c_end=document.cookie.indexOf(";",c_start)
+      if (c_end==-1) c_end=document.cookie.length
+      return unescape(document.cookie.substring(c_start,c_end))
+    }
+  }
+  return ""
+}
+
+function setCookie(c_name,value,expiredays){
+  var exdate=new Date()
+  exdate.setDate(exdate.getDate()+expiredays)
+  document.cookie=c_name+ "=" +escape(value)+
+  ((expiredays==null) ? "" : ";expires="+exdate.toGMTString())
+}
+
+function getLang(){
+  var lang='br';
+  var co_lang = getCookie('lang');
+  if(co_lang != "")
+    lang = co_lang;
+  return lang;
+}
+
+function getFromWhere(change){
+  var reminder = {
+    'en':{
+      "heart" : "Give video more hearts, download Mideo now",
+      "reply" : "Give video more comments, download Mideo now",
+      "user" : "Check more friends’ profile, download Mideo now",
+      "comment" : "Reply this comment, download Mideo now",
+      "participant" : "Check more people involved, download Mideo now"
+    },
+    'br':{
+       "heart" : "Dê mais likes, baixe o Mideo agora",
+       "reply" : "Comente mais, baixe o Mideo agora",
+       "user" : "Veja o perfil dos seus amigos, baixe o Mideo agora",
+       "comment" : "Responda esse comentário, baixe o Mideo agora",
+       "participant" : "Veja pessoas envolvidas, baixe o Mideo agora"
+    },
+    'es':{
+        "heart" : "Dar más le gusta, descarga Mideo ahora",
+        "reply" : "Comentario más , descargue el Mideo ahora",
+        "user" : "Ver perfil de tus amigos , descarga la Mideo ahora",
+        "comment" : "Responder a este comentario , descarga Mideo ahora",
+        "participant" : "Que la gente participe , descarga Mideo ahora"
+    }
+  };
+  var from = window.location.search.match(/(&from=.*?E)/g)[0];
+  from = from.replace('&from=','');
+  from = from.replace('E','');
+  if(from != null){
+    $('.reminder').removeClass('fade');
+  }
+  var lang = window.location.search.match(/(&country=.*?&)/g);
+  if(lang != null && change == null){
+    language = lang[0].replace('&country=','');
+    language = language.replace('&','');
+    language = language.toLowerCase();
+    $('.hint').html(reminder[language][from]);
+  }else{
+    if(change != null){$('.hint').html(reminder[change][from]);}
+    else $('.hint').html(reminder['br'][from]);
+  }
+}
+
+function changeLang(lang){
+  var data={
+    'en':[
+      'Make video show, make friends',
+      'Get it on',
+      'download'
+      ],
+    'br':[
+      'fazer o vídeo mostra,fazer amigos',
+      'DISPONíVEL NO',
+      'baixar'
+      ],
+    'es':[
+      'Registrar el mejor momento',
+      'conseguirlo en',
+      'descargar'
+      ]};
+  var v = data[lang];
+  for (var i = 0; i < v.length; i++) {
+    $('.lang_'+i).html(v[i]);
+  }
+  setCookie('lang',lang,10)
+
+  var dom = $('.clang[data-lang="'+lang+'"]');
+  $('.show_lang').html(dom.html());
+
+  if (lang == "br") {
+    document.title = "Mideo:Grave o melhor momento";
+  } else if (lang == 'es') {
+    document.title = "Mideo:Registrar el mejor momento";
+  } else {
+    document.title = "Mideo:Record every moment";
+  }
+  getFromWhere(lang);
+}
+
+var isShow = false;
+
+$(function(){
+  $('.ga_logo').click(function(e) {
+    var googlePlay_detail="https://play.google.com/store/apps/details?id=com.mideo&referrer=utm_source%3Dhtml5%26utm_medium%3Dclick%26utm_term%3Dbanner%26utm_content%3DGooglePlay%26utm_campaign%3DGuanWang";
+    ga("send", "event", "GuanWang", "GooglePlay");
+    jump(googlePlay_detail, appTopicUrl, window.location.search);
+  });
+  $('.ga_apk').click(function(e) {
+    ga("send", "event", "GuanWang", "Apk");
+    var href = "./index/android_mideo.apk";
+    window.location.href = href;
+  });
+  $(".c1").click(function(){
+      ga("send", "event", "GuanWang", "Facebook");
+      window.location.href="https://www.facebook.com/mideoshow";
+  })
+  $(".c2").click(function(){
+    ga("send", "event", "GuanWang", "Twitter");
+      window.location.href="https://twitter.com/mideotv";
+  })
+  $(".c3").click(function(){
+    ga("send", "event", "GuanWang", "Instagram");
+    window.location.href="https://www.instagram.com/mideo.tv/";
+  });
+
+  if(getLang()!='br'){
+    changeLang(getLang())
+  }
+
+  $('.app_lang').click(function(e){
+    $('.clang').show();
+    event.preventDefault();
+    event.stopPropagation();
+    isShow = true;
+  })
+
+  $('.clang').click(function(event){
+    $('.clang').hide();
+    isShow = true;
+    var c_lang=$(this).attr('data-lang');
+    if(c_lang != getLang()){
+      ga("send", "event", "GuanWang", "YuYan");
+      changeLang(c_lang)
+    }
+    event.preventDefault();
+    event.stopPropagation();
+  });
+
+  $(window).click(function(e) {
+    if (isShow) {
+      $('.clang').hide();
+      isShow = false;
+    }
+  });
+  getFromWhere();
+});
+
+  function jump(httpurl, appurl, link) { //判断app或者浏览器链接打开
+
+        // Deep link to your app goes here
+        document.getElementById("l").src = appurl + link;
+
+        setTimeout(function() {
+            // Link to the App Store should go here -- only fires if deep link fails
+            window.location = httpurl + link;
+        }, 500);
+  }
+
+</script>
+
+

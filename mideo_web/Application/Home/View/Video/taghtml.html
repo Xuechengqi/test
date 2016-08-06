@@ -1,0 +1,6 @@
+<div style="min-height:200px;">
+<label for="male">标签：</label>
+<volist name="tag_list" id="tag">
+<span><input <?php if($tag['rid']) echo "checked"; ?> type="checkbox" name="tag" value="{$tag.id}" />{$tag.title}</span>
+</volist>
+</div>

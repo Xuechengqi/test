@@ -1,0 +1,131 @@
+<include file="./Public/widget/head.html" title="用户管理——Mideo管理员管理系统" keywords="Mideo"/>
+<link rel="stylesheet" type="text/css" href="__CSS__/index.css">
+<link rel="stylesheet" type="text/css" href="__CSS__/admin.css">
+<style type="text/css">
+    .move{
+    cursor: move;
+    cursor: -webkit-grabbing;
+    }
+</style>
+<include file="./Public/widget/header.html"/>
+        <include file="./Public/widget/topheader.html"/>
+        <ul id="side" class="side">
+            <include file="./Public/widget/leftnav.html"/>
+        </ul>
+        <div class="content">
+            <include file="./Public/widget/nav/user.html"/>
+            <table class="table table-border mt20">
+                <thead>
+                    <tr>
+                        <th>用户ID</th>
+                        <th>账号绑定</th>
+                        <th>用户名</th>
+                        <th>头像</th>
+                        <th>签名</th>
+                        <th>注册时间</th>
+                        <th>排序</th>
+                        <th>取消</th>
+                    </tr>
+                </thead>
+                <tbody id="ruitems">
+                    <volist name="list" id="item">
+                    <tr>
+                        <td>{$item.id}</td>
+                        <td>
+                            facebook:{$item.facebook}<br/>
+                            twitter:{$item.twitter}<br/>
+                            google:{$item.google}<br/>
+                            instagram:{$item.instagram}
+                        </td>
+                        <td>{$item.username}</td>
+                        <td><img style="max-width:100px;max-height: 100px;" src="{$item.avatar|getAvatarUrl}" alt=""></td>
+                        <td>{$item.motto}</td>
+                        <td>{$item.addtime|date='Y-m-d H:i:s',###}</td>
+                        <td class="move" data-id="{$item.id}">拖动排序({$item.recommendtime})</td>
+                        <td><input class="js_cancelremoccend btn btn-danger" data-id="{$item.id}" type="button" value="取消" /></td>
+                    </tr>
+                    </volist>
+                </tbody>
+            </table>
+            <div class="pager">{$page}</div>
+        </div>
+<include file="./Public/widget/footer.html"/>
+<script src="__JS__/Sortable.min.js"></script>
+<script type="text/javascript">
+    $(function() {
+        initEvent();
+    });
+
+    function initEvent() {
+        $('.js_cancelremoccend').click(function(e) {
+            if (confirm("确认取消？")) {
+                var id = $(this).attr('data-id');
+                $.ajax({
+                    dataType:'json',
+                    url: '__CONTROLLER__/action_cancelrecommend/id/' + id
+                }).done(function(data) {
+                    if (data.code == 200) {
+                        window.location.reload();
+                    } else {
+                        alert(data.msg);
+                    }
+                }).fail(function(msg) {
+                    console.error(msg);
+                    alert('操作失败');
+                });
+            }
+        });
+
+        var el = document.getElementById('ruitems');
+        var isSortEnd = true;
+        var sortable = Sortable.create(el, {
+            handle: ".move",
+            onStart: function(evt) {
+                if (!isSortEnd) {
+                    alert("正在进行一上次排序操作，请稍后！");
+                }
+            },
+            onEnd: function(evt) {
+                if (!isSortEnd) {
+                    return;
+                }
+                var oindex = evt.oldIndex;
+                var nindex = evt.newIndex;
+                console.log(oindex, nindex);
+                if (oindex != nindex) {
+                    isSortEnd = false;
+                    var isMoveDown = nindex > oindex ? 1 : 0;
+                    var min,max;
+                    if (isMoveDown) {
+                        min = oindex;
+                        max = nindex;
+                    } else {
+                        min = nindex;
+                        max = oindex;
+                    }
+                    var ids = [];
+                    for (var i = min; i <= max; i++) {
+                        ids.push($("#ruitems .move:eq("+i+")").attr("data-id"));
+                    }
+                    console.log(isMoveDown, ids);
+                    $.ajax({
+                        dataType:'json',
+                        url: '__CONTROLLER__/action_recommendsort/isdown/' + isMoveDown + "/ids/" + ids.join(",")
+                    }).done(function(data) {
+                        if (data.code == 200) {
+                            window.location.reload();
+                        } else {
+                            isSortEnd = true;
+                            alert(data.msg);
+                        }
+                    }).fail(function(msg) {
+                        isSortEnd = true;
+                        console.error(msg);
+                        alert('操作失败');
+                    });
+                }
+            }
+        });
+    }
+</script>
+<include file="./Public/widget/foot.html"/>

@@ -1,0 +1,67 @@
+<include file="./Public/widget/head.html" title="修改话题——Mideo管理员管理系统" keywords="Mideo"/>
+<link rel="stylesheet" type="text/css" href="__CSS__/index.css">
+<link rel="stylesheet" type="text/css" href="__CSS__/admin.css">
+<include file="./Public/widget/header.html"/>
+        <include file="./Public/widget/topheader.html"/>
+        <ul id="side" class="side">
+            <include file="./Public/widget/leftnav.html"/>
+        </ul>
+        <div class="content">
+            <include file="./Public/widget/nav/topic.html"/>
+            <form class="form" action="__CONTROLLER__/action_edit" enctype = "multipart/form-data" method="post">
+                <input type="hidden" name="id" value="{$item.id}" />
+                <div class="form-item">
+                    <label class="item-title">国家：</label>
+                    <select name="country">
+                        <volist name="country" id="citem">
+                        <if condition="$key eq $currCountry">
+                        <option value="{$key}" selected="selected">{$citem}</option>
+                        <else/>
+                        <option value="{$key}">{$citem}</option>
+                        </if>
+                        </volist>
+                    </select>
+                </div>
+                <div class="form-item">
+                    <label class="item-title">显示：</label>
+                    <input <?php if($item['show']==1) echo "checked='checked'"; ?> type="radio" name="show" value="1" /> 显示
+                    <input <?php if($item['show']==0) echo "checked='checked'"; ?> type="radio" name="show" value="0" /> 不显示
+                </div>
+                <div class="form-item">
+                    <label class="item-title">标题：</label>
+                    <input type="text" class="text-long" name="title" value="{$item.title}" placeholder="title" />
+                </div>
+                <div class="form-item">
+                    <label class="item-title">描述：</label>
+                    <textarea  name="summary"  placeholder="summary" style="width:400px;height: 100px;">{$item.summary}</textarea>
+                    <!-- <input type="text" class="text-long" name="summary" value="{$item.summary}" placeholder="summary" /> -->
+                </div>
+                <div class="form-item">
+                    <label class="item-title">内容：</label>
+                    <input type="text" class="text-long" name="content" value="{$item.content}" placeholder="content" />
+                </div>
+                <div class="form-item">
+                    <label class="item-title">图片：</label>
+                    <input type="file" name="picture" />
+                    <img style="max-width:100px;max-height: 100px;" src="{$null|getBaseUrl}/uploads/{$item.picture}" alt=""/>
+                </div>
+                <div class="form-item">
+                    <label class="item-title">海报：</label>
+                    <input type="file" name="hot_pic" />
+                    <img style="max-width:100px;max-height: 100px;" src="{$null|getBaseUrl}/uploads/{$item.hot_pic}" alt=""/>
+                </div>
+                <div class="form-item">
+                    <label class="item-title">视频：</label>
+                    <input type="file" name="video" />
+                    <video src="{$null|getBaseUrl}/uploads/{$item.video}" style="max-width:300px;max-height: 300px;" controls="controls">
+                        您的浏览器不支持 video 标签。
+                    </video>
+                </div>
+                <div class="form-item">
+                    <label class="item-title">&nbsp;</label>
+                    <input type="submit" value="修改"/>
+                </div>
+            </form>
+        </div>
+<include file="./Public/widget/footer.html"/>
+<include file="./Public/widget/foot.html"/>

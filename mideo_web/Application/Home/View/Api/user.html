@@ -1,0 +1,465 @@
+<include file="./Public/widget/head.html" title="Api——Mideo管理员管理系统" keywords="Mideo"/>
+<link rel="stylesheet" type="text/css" href="__CSS__/index.css">
+<link rel="stylesheet" type="text/css" href="__CSS__/admin.css">
+<include file="./Public/widget/header.html"/>
+        <include file="./Public/widget/topheader.html"/>
+        <ul id="side" class="side">
+            <include file="./Public/widget/leftnav.html"/>
+        </ul>
+        <div class="content">
+            <include file="./Public/widget/nav/api.html"/>
+            <p class="mt20 mb20">baseurl: {$null|getApiBaseUrl}/user/&nbsp;&nbsp;token<span class="tcred">(所有API请求必须添加此参数)</span>: {$null|getToken}</p>
+            <table class="table table-border">
+                <thead>
+                    <tr>
+                        <th>api</th>
+                        <th>参数</th>
+                        <th>返回值</th>
+                        <th>备注</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><a href="{$null|getApiBaseUrl}/user/get" target="_blank">get</a></td>
+                        <td>
+                        userid(数字，<span class="tcred">必须</span>)<br/>
+                        curruserid(当前登录用户ID，可选）</td>
+                        <td><pre class="apicode">
+{
+    "code":200,
+    "message":"",
+    "data":{
+        "id":"1",
+        "username":"atwal",
+        "gender": "unknown",
+        "avatar":"xxx/avatar\/201603\/03\/01\/2016-03-03\/56d82e7b58744.png",
+        "motto":"good good learn, day day up",
+        "attentioncount":"4",
+        "followcount":"3",
+        "f": "xxx",
+        "t": "xxx",
+        "g": "xxx",
+        "i": "xxx",
+        "f_n": "xxx",
+        "t_n": "xxx",
+        "g_n": "xxx",
+        "i_n": "xxx",
+        "attention": 0
+    }
+}</pre></td>
+                        <td>获取用户信息</td>
+                    </tr>
+                    <tr>
+                        <td><a href="{$null|getApiBaseUrl}/user/publishvideos/page/1/userid/1" target="_blank">publishvideos</a></td>
+                        <td>page(数字，<span class="tcred">必须</span>)<br/>userid(数字，<span class="tcred">必须</span>)<br/>myid(当前登录用户id<span class="tcred">必须</span>)</td>
+                        <td><pre class="apicode">
+{
+    "code": 200,
+    "message": "",
+    "data": [
+        {
+            topic_title: "the most beautiful school",
+            topic_content: "Do you know the most beautiful school?",
+            topic_picture: "http://47.89.45.68/uploads/topic/AA/201604/570cf275a7f2d.jpg",
+            "uuid": "163cfc89-e589-4e60-8ae8-09e56c117822",
+            "userid": "1",
+            "description": "这是一个测试视频",
+            "thumb": "http://mideo.local.com/uploads/201603/02/03/2016-03-02/56d654a21bb7e.png",
+            "filepath": "http://mideo.local.com/uploads/201603/02/03/2016-03-02/56d654a21d922.mp4",
+            "duration": "30",
+            "size": "30720",
+            "likecount": "0",
+            "commentcount": "0",
+            "createtime": "1456911082",
+            "avatar": "http://mideo.local.com/avatar/201603/03/01/2016-03-03/56d82e7b58744.png",
+            "username": "atwal",
+            "tags": [
+                {
+                    tag_id: "30",
+                    title: "Cantar UMA canção",
+                    content: "Cantar UMA canção"
+                }...
+            ],
+            "like": 1,
+            "comments": [
+            {
+              "id": "1",
+              "userid": "1",
+              "username": "atwal",
+              "content": "good good good",
+              "createtime": "1456911082"
+            }...
+            ],
+            "attention": 1
+        }...
+    ]
+}</pre></td>
+                        <td>获取用户发布的视频</td>
+                    </tr>
+                    <tr>
+                        <td><a href="{$null|getApiBaseUrl}/user/likevideos/page/1/userid/1" target="_blank">likevideos</a></td>
+                        <td>page(数字，<span class="tcred">必须</span>)<br/>userid(数字，<span class="tcred">必须</span>)<br/>myid(当前登录用户id<span class="tcred">必须</span>)</td>
+                        <td><pre class="apicode">
+{
+    "code":200,
+    "message":"",
+    "data":[
+        {
+            topic_title: "the most beautiful school",
+            topic_content: "Do you know the most beautiful school?",
+            topic_picture: "http://47.89.45.68/uploads/topic/AA/201604/570cf275a7f2d.jpg",
+            "uuid": "163cfc89-e589-4e60-8ae8-09e56c117822",
+            "userid": "1",
+            "description": "这是一个测试视频",
+            "thumb": "http://mideo.local.com/uploads/201603/02/03/2016-03-02/56d654a21bb7e.png",
+            "filepath": "http://mideo.local.com/uploads/201603/02/03/2016-03-02/56d654a21d922.mp4",
+            "duration": "30",
+            "size": "30720",
+            "likecount": "0",
+            "commentcount": "0",
+            "createtime": "1456911082",
+            "avatar": "http://mideo.local.com/avatar/201603/03/01/2016-03-03/56d82e7b58744.png",
+            "username": "atwal",
+            "tags": [
+                {
+                    tag_id: "30",
+                    title: "Cantar UMA canção",
+                    content: "Cantar UMA canção"
+                }...
+            ]
+            "like": 1,
+            "comments": [
+                {
+                    "id": "1",
+                    "userid": "1",
+                    "username": "atwal",
+                    "content": "good good good",
+                    "createtime": "1456911082"
+                }...
+            ],
+            "attention": 1
+        }...
+    ]
+}</pre></td>
+                        <td>获取用户喜欢的视频</td>
+                    </tr>
+                    <tr>
+                        <td><a href="{$null|getApiBaseUrl}/user/login" target="_blank">login</a></td>
+                        <td>
+                        id(<span class="tcred">必须</span>)<br/>
+                        secret(<span class="tcred">必须</span>)</td>
+                        <td><pre class="apicode">
+{
+    "code":200,
+    "message":"",
+    "data":{
+        "id":"1",
+        "username":"atwal",
+        "avatar":"xxx/avatar\/201603\/03\/01\/2016-03-03\/56d82e7b58744.png",
+        "motto":"good good learn, day day up",
+        "attentioncount":"4",
+        "followcount":"3"
+    }
+}</pre></td>
+                        <td>内部用户登录</td>
+                    </tr>
+                    <tr>
+                        <td><a href="{$null|getApiBaseUrl}/user/fcmtoken" target="_blank">fcmtoken</a></td>
+                        <td>
+                        userid(<span class="tcred">必须</span>)<br/>
+                        token(<span class="tcred">必须</span>)</td>
+                        <td><pre class="apicode">
+{
+    "code":200,
+    "message":"",
+    "data":{
+    }
+}</pre></td>
+                        <td>用户推送token更新</td>
+                    </tr>
+                    <tr>
+                        <td><a href="{$null|getApiBaseUrl}/user/bindphone" target="_blank">bindphone</a></td>
+                        <td>
+                            currentid(当前登录用户ID<span class="tcred">必须</span>)<br/>
+                            numbers(手机号，多个用英文","隔开<span class="tcred">必须</span>)<br/>
+                        </td>
+                        <td><pre class="apicode">
+{
+    "code":200,
+    "message":""
+}</pre></td>
+                        <td>绑定用户</td>
+                    </tr>
+
+                    <tr>
+                        <td><a href="{$null|getApiBaseUrl}/user/bind" target="_blank">bind</a></td>
+                        <td>
+                            from(facebook,twitter,google,instagram之一<span class="tcred">必须</span>)<br/>
+                            id(各平台获取到的用户唯一标识，<span class="tcred">必须</span>)<br/>
+                            username(字符串，<span class="tcred">必须</span>)<br/>
+                            country(默认为美国US，<span class="tcred">必须</span>)<br/>
+                            avatar（头像图片，可选）<br/>
+                            gender（性别 'male','female','unknown' ，可选）<br/>
+                            motto（字符串，可选）
+                        </td>
+                        <td><pre class="apicode">
+{
+    "code":200,
+    "message":"",
+    "data":{
+        "id":"1",
+        "username":"atwal",
+        "avatar":"xxx/avatar\/201603\/03\/01\/2016-03-03\/56d82e7b58744.png",
+        "motto":"good good learn, day day up",
+        "attentioncount":"4",
+        "followcount":"3"
+    }
+}</pre></td>
+                        <td>绑定用户</td>
+                    </tr>
+                    <tr>
+                        <td><a href="{$null|getApiBaseUrl}/user/addbind" target="_blank">addbind</a></td>
+                        <td>
+                            from(facebook,twitter,google,instagram之一<span class="tcred">必须</span>)<br/>
+                            id(各平台获取到的用户唯一标识，<span class="tcred">必须</span>)<br/>
+                            name(各平台获取到的用户名称，<span class="tcred">必须</span>)<br/>
+                            currentid(当前登录用户id，<span class="tcred">必须</span>)
+                        </td>
+                        <td><pre class="apicode">
+{
+    "code":200,
+    "message":""
+}</pre></td>
+                        <td>增加绑定（已登录状态下）</td>
+                    </tr>
+                    <tr>
+                        <td><a href="{$null|getApiBaseUrl}/user/unbind" target="_blank">unbind</a></td>
+                        <td>
+                            id(当前登录用户id，<span class="tcred">必须</span>)<br/>
+                            from(facebook,twitter,google,instagram之一<span class="tcred">必须</span>)
+                        </td>
+                        <td><pre class="apicode">
+{
+    "code":200,
+    "message":""
+}</pre></td>
+                        <td>解除绑定（已登录状态下）</td>
+                    </tr>
+                    <tr>
+                        <td><a href="{$null|getApiBaseUrl}/user/update" target="_blank">update</a></td>
+                        <td>
+                            id(<span class="tcred">必须</span>)<br/>
+                            username(<span class="tcred">必须</span>)<br/>
+                            motto（<span class="tcred">必须</span>）<br/>
+                            gender（性别，可选）
+                        </td>
+                        <td><pre class="apicode">
+{
+    "code":200,
+    "message":""
+}</pre></td>
+                        <td>更新用户信息</td>
+                    </tr>
+                    <tr>
+                        <td><a href="{$null|getApiBaseUrl}/user/updateavatar" target="_blank">updateavatar</a></td>
+                        <td>
+                            id(<span class="tcred">必须</span>)<br/>
+                            avatar（头像图片，<span class="tcred">必须</span>）
+                        </td>
+                        <td><pre class="apicode">
+{
+    "code":200,
+    "message":""
+}</pre></td>
+                        <td>更新用户头像</td>
+                    </tr>
+                    <tr>
+                        <td><a href="{$null|getApiBaseUrl}/user/like" target="_blank">like</a></td>
+                        <td>videoid(<span class="tcred">必须</span>)<br/>userid(<span class="tcred">必须</span>)</td>
+                        <td><pre class="apicode">
+{
+    "code":xxx（状态码）,
+    "message":""
+}</pre></td>
+                        <td>喜欢视频</td>
+                    </tr>
+                    <tr>
+                        <td><a href="{$null|getApiBaseUrl}/user/unlike" target="_blank">unlike</a></td>
+                        <td>videoid(<span class="tcred">必须</span>)<br/>userid(<span class="tcred">必须</span>)</td>
+                        <td><pre class="apicode">
+{
+    "code":xxx（状态码）,
+    "message":""
+}</pre></td>
+                        <td>取消喜欢</td>
+                    </tr>
+                    <tr>
+                        <td><a href="{$null|getApiBaseUrl}/user/attention" target="_blank">attention</a></td>
+                        <td>fromuserid(<span class="tcred">必须</span>)<br/>touserid(<span class="tcred">必须</span>)</td>
+                        <td><pre class="apicode">
+{
+    "code":xxx（状态码）,
+    "message":""
+}</pre></td>
+                        <td>关注用户</td>
+                    </tr>
+                    <tr>
+                        <td><a href="{$null|getApiBaseUrl}/user/unattention" target="_blank">unattention</a></td>
+                        <td>fromuserid(<span class="tcred">必须</span>)<br/>touserid(<span class="tcred">必须</span>)</td>
+                        <td><pre class="apicode">
+{
+    "code":xxx（状态码）,
+    "message":""
+}</pre></td>
+                        <td>取消关注用户</td>
+                    </tr>
+                    <tr>
+                        <td><a href="{$null|getApiBaseUrl}/user/getfans" target="_blank">getfans</a></td>
+                        <td>
+                        myid(当前登录用户id<span class="tcred">必须</span>)<br/>
+                        userid(需要查询的用户id<span class="tcred">必须</span>)<br/>
+                        page(<span class="tcred">必须</span>)
+                        </td>
+                        <td><pre class="apicode">
+{
+    "code": 200,
+    "message": "",
+    "data": [
+        {
+            "id": "7",
+            "username": "uiwuqi",
+            "avatar": "",
+            "attention": 1
+        }
+        ...
+    ]
+}</pre></td>
+                        <td>获取粉丝列表</td>
+                    </tr>
+                    <tr>
+                        <td><a href="{$null|getApiBaseUrl}/user/getfollows" target="_blank">getfollows</a></td>
+                        <td>
+                        myid(当前登录用户id<span class="tcred">必须</span>)<br/>
+                        userid(需要查询的用户id<span class="tcred">必须</span>)<br/>
+                        page(<span class="tcred">必须</span>)
+                        </td>
+                        <td><pre class="apicode">
+{
+    "code": 200,
+    "message": "",
+    "data": [
+        {
+            "id": "7",
+            "username": "uiwuqi",
+            "avatar": "",
+            "attention": 0
+        }
+        ...
+    ]
+}</pre></td>
+                        <td>获取关注用户列表</td>
+                    </tr>
+                    <tr>
+                        <td><a href="{$null|getApiBaseUrl}/user/search" target="_blank">search</a></td>
+                        <td>
+                        id(用户id<span class="tcred">二选一</span>)<br/>
+                        name(用户名称模糊查询<span class="tcred">二选一</span>)<br/>
+                        myid(当前登录用户id<span class="tcred">必须</span>)<br/>
+                        </td>
+                        <td><pre class="apicode">
+{
+    "code": 200,
+    "message": "",
+    "data": [
+        {
+            id: "35",
+            username: "Hallie",
+            motto: "",
+            attention: 0,
+            avatar: "http://uploads.mideo.cc/avatar/35.jpg"
+        }
+        ...
+    ]
+}</pre></td>
+                        <td>搜索用户</td>
+                    </tr>
+                    <tr>
+                        <td><a href="{$null|getApiBaseUrl}/user/recom/myid/83" target="_blank">recom</a></td>
+                        <td>
+                        myid(当前登录用户id<span class="tcred">必须</span>)<br/>
+                        page(<span class="tcred">必须</span>)<br/>
+                        country(BR <span class="tcred">必须</span>)
+                        </td>
+                        <td><pre class="apicode">
+{
+    "code": 200,
+    "message": "",
+    "data": [
+        {
+            id: "35",
+            username: "Hallie",
+            motto: "",
+            avatar: "http://uploads.mideo.cc/avatar/35.jpg"
+        }
+        ...
+    ]
+}</pre></td>
+                        <td>未关注过的推荐用户</td>
+                    </tr>
+                    <tr>
+                        <td><a href="{$null|getApiBaseUrl}/user/recom_single/myid/83" target="_blank">recom_single</a></td>
+                        <td>
+                        myid(当前登录用户id<span class="tcred">必须</span>)<br/>
+                        country(BR <span class="tcred">必须</span>)
+                        </td>
+                        <td><pre class="apicode">
+{
+    "code": 200,
+    "message": "",
+    "data": [
+        {
+            id: "35",
+            username: "Hallie",
+            motto: "",
+            avatar: "http://uploads.mideo.cc/avatar/35.jpg"
+        }
+        ...
+    ]
+}</pre></td>
+                        <td>未关注过的推荐用户(首页朋友圈顶部推荐位专用)</td>
+                    </tr>
+                    <tr>
+                        <td><a href="{$null|getApiBaseUrl}/user/nointerest" target="_blank">nointerest</a></td>
+                        <td>
+                        fromuserid(<span class="tcred">必须</span>)<br/>
+                        touserid(<span class="tcred">必须</span>)
+                        </td>
+                        <td><pre class="apicode">
+{
+    "code": 200,
+    "message": ""
+}</pre></td>
+                        <td>不感兴趣</td>
+                    </tr>
+                    <tr>
+                        <td><a href="{$null|getApiBaseUrl}/user/bindUserDetail" target="_blank">bindUserDetail</a></td>
+                        <td>
+                        userid(当前登录用户id<span class="tcred">必须</span>)<br/>
+                        email<br/>
+                        age_min(数字)<br/>
+                        age_max(数字)<br/>
+                        devices(字符串)<br/>
+                        currency(字符串)
+                        </td>
+                        <td><pre class="apicode">
+{
+    "code": 200,
+    "message": ""
+}</pre></td>
+                        <td>绑定用户信息</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+<include file="./Public/widget/footer.html"/>
+<include file="./Public/widget/foot.html"/>

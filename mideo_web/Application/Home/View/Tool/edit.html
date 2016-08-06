@@ -1,0 +1,84 @@
+<include file="./Public/widget/head.html" title="修改音乐——Mideo管理员管理系统" keywords="Mideo"/>
+<link rel="stylesheet" type="text/css" href="__CSS__/index.css">
+<link rel="stylesheet" type="text/css" href="__CSS__/admin.css">
+<include file="./Public/widget/header.html"/>
+        <include file="./Public/widget/topheader.html"/>
+        <ul id="side" class="side">
+            <include file="./Public/widget/leftnav.html"/>
+        </ul>
+        <div class="content">
+            <include file="./Public/widget/nav/tool.html"/>
+            <form class="form" action="__CONTROLLER__/action_edit" method="post">
+                <input type="hidden" name="id" value="{$item.id}" />
+                <div class="form-item">
+                    <label class="item-title">国家：</label>
+                    <select id="c_country" name="country">
+                        <volist name="country" id="citem">
+                        <if condition="$key eq $currCountry">
+                        <option value="{$key}" selected="selected">{$citem}</option>
+                        <else/>
+                        <option value="{$key}">{$citem}</option>
+                        </if>
+                        </volist>
+                    </select>
+                </div>
+                <div class="form-item">
+                    <label class="item-title">分类：</label>
+                    <select id="c_cid" name="cid">
+                        <option value="0">未分类</option>
+                        <volist name="cate_list" id="vo">
+                        <if condition="$vo.id eq $item['cid']">
+                        <option value="{$vo.id}" selected="selected">{$vo.name}</option>
+                        <else/>
+                        <option value="{$vo.id}">{$vo.name}</option>
+                        </if>
+                        </volist>
+                    </select>
+                </div>
+                <div class="form-item">
+                    <label class="item-title">标题：</label>
+                    <input type="text" class="text-long" name="title" value="{$item.title}" placeholder="title" />
+                </div>
+                <div class="form-item">
+                    <label class="item-title">作者：</label>
+                    <input type="text" class="text-long" name="author" value="{$item.author}" placeholder="author" />
+                </div>
+                <div class="form-item">
+                    <label class="item-title">时长：</label>
+                    <input type="text" class="text-long" name="duration" value="{$item.duration}" placeholder="duration" />
+                </div>
+                <div class="form-item">
+                    <label class="item-title">源地址：</label>
+                    <input type="text" class="text-long" name="url" value="{$item.url}" placeholder="url" />
+                </div>
+                <div class="form-item">
+                    <label class="item-title">&nbsp;</label>
+                    <input type="submit" value="修改"/>
+                </div>
+            </form>
+        </div>
+<include file="./Public/widget/footer.html"/>
+<include file="./Public/widget/foot.html"/>
+<script type="text/javascript">
+
+$("#c_country").change(function(){
+
+    var country = $(this).val(); 
+    $.ajax({
+        dataType:'json',
+        url: '__CONTROLLER__/mcate_list/country/' + country 
+    }).done(function(data) {
+        if (data.code == 200) {
+            $('#c_cid').empty();
+            $.each( data.data, function(i, n){
+                $('#c_cid').append('<option value="'+n.id+'">'+n.name+'</option>');
+            });
+        }else{
+            alert(data.msg);
+        }
+    }).fail(function(msg) {
+        alert('操作失败');
+    });
+   
+});
+</script>

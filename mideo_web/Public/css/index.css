@@ -1,0 +1,243 @@
+.side{
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 180px;
+    bottom: 0;
+    border-right: 1px solid #ccc;
+    overflow: auto;
+    line-height: 30px;
+}
+.side li{
+    position: relative;
+}
+.side li a{
+    font-size: 16px;
+    display: block;
+    color: #333;
+    text-decoration: none;
+    padding:10px 0 10px 36px;
+}
+.side .curr a,
+.side li a:hover{
+    text-decoration: none;
+    background-color: #666;
+    color: #fff;
+}
+.side li .icon{
+      position: absolute;
+      left: 6px;
+      top: 12px;
+      width: 22px;
+      height: 22px;
+}
+
+.content{
+    position: absolute;
+    top: 60px;
+    left: 179px;
+    right: 0;
+    border-left: 1px solid #ccc;
+    padding: 20px;
+}
+.header{
+    height: 60px;
+    background: linear-gradient(to bottom,#f3f3f3,#e2e2e2) #f3f3f3;
+    color: #fff;
+    line-height: 60px;
+    padding-left: 10px;
+}
+.header h1{
+    color:#333;
+    display: inline-block;
+}
+
+.exts{
+
+}
+.exts .item{
+    margin: 10px 0;
+    font-size: 16px;
+}
+.exts input,select{
+    padding: 5px 10px;
+    font-size: 14px;
+}
+.exts .item-title{
+    display: inline-block;
+    width: 100px;
+    text-align: right;
+}
+
+.revenue .timerange{
+  display: inline-block;
+  margin: 0 20px;
+}
+
+.faq{
+
+}
+.faq li{
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 30px;
+}
+.faq .detail{
+    margin-left: 20px;
+}
+.faq .detail li{
+    font-size: 16px;
+    color: #666;
+    margin: 5px 0;
+}
+
+.form{
+    border:1px solid #eee;
+    padding: 10px;
+    margin: 10px 0;
+}
+.form-title{
+    margin: 5px 0;
+    padding: 0;
+    font-weight: 400;
+}
+.form input,
+.form select{
+    padding: 5px 10px;
+    font-size: 14px;
+}
+.form input[type=number]{
+    width: 180px;
+}
+.form .item-title{
+    display: inline-block;
+    margin-right: 5px;
+    width: 68px;
+    text-align: right;
+}
+.form  #info_wiretransfer .item-title{
+    width: 130px;
+}
+
+.f-fb{
+    font-weight: 700;
+}
+.f-hl{
+    color: #F60;
+}
+.f-sp{
+    display: inline-block;
+    margin: 0 20px;
+}
+.mb20{
+    margin-bottom: 20px;
+}
+
+.code{
+    display: block;
+    margin: 10px 0;
+    padding: 5px;
+    line-height: 25px;
+    font-size: 16px;
+    background-color: #f3f3f3;
+    border:1px solid #ccc;
+    white-space: pre-wrap;       /* CSS 3 */
+    white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+    white-space: -pre-wrap;      /* Opera 4-6 */
+    white-space: -o-pre-wrap;    /* Opera 7 */
+    word-wrap: break-word;
+}
+
+.dashboard{
+
+}
+.dashboard .sum-item{
+    width: 49%;
+    border: 1px solid #ccc;
+}
+.dashboard .sum-head{
+    background-color: #eee;
+    padding: 5px 10px;
+    height: 30px;
+    line-height: 20px;
+    border-bottom: 1px solid #ccc;
+}
+.dashboard .sum-item .sum-body{}
+.dashboard .sum-item .sum-body li{
+    padding: 5px 10px;
+    border-bottom: 1px dotted #eee;
+}
+.dashboard .sum-item .sum-body li:last-child{
+    border-bottom: none;
+}
+
+.dashboard .chart{
+    margin-top: 20px;
+    border:1px solid #ccc;
+}
+.msg-title,
+.msg-time{
+    color: #888;
+}
+.noread .msg-title,.noread .msg-time{
+    color: #000;
+    font-weight: 700;
+}
+.msgtip{
+    display: inline-block;
+    vertical-align: middle;
+    zoom: 1;
+    width: auto;
+    height: 22px;
+    line-height: 22px;
+    color: #fff;
+    padding-left: 5px;
+    padding-right: 5px;
+    font-size: 14px;
+    text-decoration: none;
+    background: #ff6558;
+    border-radius: 4px;
+    margin-right: 0;
+    margin-left: 5px;
+}
+.msgtip-0{
+    display: none;
+}
+.msgshow-time{color: #888;margin-top: 10px;}
+.msg-body{margin-top: 10px;line-height: 30px;font-size: 14px;color: #666;}
+
+
+.nav-top{
+    background: #eeeeee;
+    padding:3px 5px 0 5px;
+}
+.nav-top li {
+    display: inline-block;
+}
+.nav-top li a{
+    padding: 10px 20px;
+    display: block;
+}
+.nav-top li a.curr{
+    color: #666;
+    background: #fff;
+}
+.side .nav-not-select .curr a {
+    background-color: #fff;
+    color: #333;
+}
+.nav-top li a.hide{
+    display: none;
+}
+
+.range-nav{
+    display: inline-block;
+    height: 40px;
+    margin: 20px 0;
+}
+.range-nav a{
+    display: inline-block;
+    height: 40px;
+    line-height: 40px;
+    margin-right: 20px;
+}

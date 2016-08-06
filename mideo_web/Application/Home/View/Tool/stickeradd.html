@@ -1,0 +1,47 @@
+<include file="./Public/widget/head.html" title="添加贴纸——Mideo管理员管理系统" keywords="Mideo"/>
+<link rel="stylesheet" type="text/css" href="__CSS__/index.css">
+<link rel="stylesheet" type="text/css" href="__CSS__/admin.css">
+<include file="./Public/widget/header.html"/>
+        <include file="./Public/widget/topheader.html"/>
+        <ul id="side" class="side">
+            <include file="./Public/widget/leftnav.html"/>
+        </ul>
+        <div class="content">
+            <include file="./Public/widget/nav/tool.html"/>
+            <form class="form" action="__CONTROLLER__/stickeraction_add" enctype="multipart/form-data" method="post">
+                <div class="form-item">
+                    <label class="item-title">国家：</label>
+                    <select name="country">
+                        <volist name="country" id="citem">
+                        <if condition="$key eq $currCountry">
+                        <option value="{$key}" selected="selected">{$citem}</option>
+                        <else/>
+                        <option value="{$key}">{$citem}</option>
+                        </if>
+                        </volist>
+                    </select>
+                </div>
+                <div class="form-item">
+                    <label class="item-title">标题：</label>
+                    <input type="text" class="text-long" name="title" placeholder="title" />
+                </div>
+                <div class="form-item">
+                    <label class="item-title">时长：</label>
+                    <input type="text" class="text-long" name="duration" placeholder="duration" />
+                </div>
+                <div class="form-item">
+                    <label class="item-title">缩略图：</label>
+                    <input type="file" required="" name="thumb" placeholder="thumb" />
+                </div>
+                <div class="form-item">
+                    <label class="item-title">源文件：</label>
+                    <input type="file" required="" name="sticker" placeholder="sticker" />
+                </div>
+                <div class="form-item">
+                    <label class="item-title">&nbsp;</label>
+                    <input type="submit" value="添加"/>
+                </div>
+            </form>
+        </div>
+<include file="./Public/widget/footer.html"/>
+<include file="./Public/widget/foot.html"/>

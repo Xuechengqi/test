@@ -1,0 +1,92 @@
+html,body,div,dl,dt,dd,ul,h1,h2,h3,pre,form,label,fieldset,input,p,blockquote,th,td { margin:0; padding:0; }
+table { border-collapse:collapse; border-spacing:0; }
+fieldset, img { border:0; }
+ul { list-style:none }
+      body,html{font-size: 12px;height: 100%;width: 100%;font-family: Helvetica,arial,nimbussansl,liberationsans,freesans,clean,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";}
+      /*video{height: 100%}*/
+        .wrap{background: transparent;
+            width: 20.67rem;
+            margin:0 auto; 
+            padding-top: 0rem;
+            
+            }
+      
+        .video_bg{position: fixed;width: 100%;height:100%;}
+        .mask{position: absolute;width: 100%;height:100%;background: black;opacity: 0.4}
+        .logo{width: 4rem;height: 4rem;margin:0rem auto 0 auto;background: url('../img/x_5_3.png');background-size:cover }
+        .context{width: 100%;height: 3rem;margin: 0.5rem auto 0 auto;text-align: center}
+        .context p{padding: 0.12rem;font-size: 1rem;font-weight:bold;margin: 0;color:#FFD700;}
+        .context p:last-child{font-size: 0.7rem;font-weight: normal;color:#FFD700}
+        .wrap a{display: block;width: 8.17rem;height: 2.42rem;margin: 0.5rem auto 0 auto;background: url('../img/en-play-badge.png');background-size:cover }
+        .wrap ul{list-style: none;display: block;width:5.2rem;height: 2.6rem;margin:1.2rem auto 0 auto;}
+        .wrap ul li{float:left;margin: 0.3rem;width: 2rem;height: 2rem;}
+        .wrap ul li:first-child{background: url('../img/fa.png');background-size: cover;}
+        .wrap ul li:last-child{background: url('../img/tw.png');background-size: cover;}
+     
+
+      @media all and (orientation : portrait){
+      /*video{width: 100%;}*/
+       
+    .video_bg{
+        position:fixed;
+            z-index: -9999;
+                width: 100%;
+               background: #469BD4;
+                }
+    }
+      @media all and (orientation : landscape){
+     
+    .video_bg{background: #A900B1;
+        position: fixed;
+            right: 0;
+            bottom:0;
+            z-index: -9999;
+                width: 100%;
+                height: 100%;}
+      
+    }
+
+      /* Custom, iPhone Retina */ 
+@media only screen and (min-width : 320px) and (orientation : portrait)  {
+     html{font-size:  100%;}
+}
+
+@media only screen and (min-width : 360px) and (orientation : portrait)  {
+     html{font-size:  125%;}
+}
+@media only screen and (min-width : 400px) and (orientation : portrait)  {
+     html{font-size:  150%;}
+}
+/* Extra Small Devices, Phones */ 
+@media only screen and (min-width : 600px) and (orientation : portrait)  {
+     html{font-size:  200%;}
+}
+
+/* Small Devices, Tablets */
+
+@media only screen and (max-width : 768px) and (orientation : portrait) {
+     
+     .wrap{width: 90%}
+}
+@media only screen and (max-width : 800px) and (orientation :landscape) {
+     
+   
+}
+@media only screen and (min-width : 480px) and (orientation : landscape) {
+     html{font-size:100%;}
+}
+@media only screen and (min-width : 580px) and (orientation : landscape) {
+     html{font-size:107%;}
+}
+@media only screen and (min-width : 730px) and (orientation :landscape) {
+     html{font-size:130%;}
+}
+@media only screen and (min-width : 900px) and (orientation :landscape) {
+     html{font-size:175%;}
+}
+/* Medium Devices, Desktops */
+@media only screen and (min-width : 992px){
+     html{font-size:200%;}
+     
+}
+/* Large Devices, Wide Screens */

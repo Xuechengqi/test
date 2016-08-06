@@ -1,0 +1,68 @@
+<include file="./Public/widget/head.html" title="视频管理——Mideo管理员管理系统" keywords="Mideo"/>
+<link rel="stylesheet" type="text/css" href="__CSS__/index.css">
+<link rel="stylesheet" type="text/css" href="__CSS__/admin.css">
+<include file="./Public/widget/header.html"/>
+        <include file="./Public/widget/topheader.html"/>
+        <ul id="side" class="side">
+            <include file="./Public/widget/leftnav.html"/>
+        </ul>
+        <div class="content">
+            <include file="./Public/widget/nav/video.html"/>
+            <form action="{$null|getApiBaseUrl}/video/add" class="form" enctype = "multipart/form-data" method="post">
+                <div class="form-item">
+                    <label>视频国家：</label><volist name="allowCountry" id="country"><label><input type="checkbox" class="country" value="{$country}">{$country|getCountryName}</label>&nbsp;&nbsp;&nbsp;</volist>
+                    <input type="hidden" name="country" id="country" required="required" value="BR" />
+                </div>
+                <div class="form-item">
+                    <label>视频作者：</label><input type="input" required="required" placeholder="userid，数字" name="userid"/>
+                </div>
+                <div class="form-item">
+                    <label>视频标签：</label><input type="input"placeholder="标签id" value="" name="topicid"/>(英文逗号分隔)
+                </div>
+                <!-- <div class="form-item">
+                    <label>视频专题：</label><input type="input" required="required" placeholder="topicid" value="1" name="topicid"/>
+                </div> -->
+                <div class="form-item">
+                    <label>视频描述：</label><input type="input" required="required" placeholder="description" value="这是一个测试视频" name="description"/>
+                </div>
+                <div class="form-item">
+                    <label>缩略图片：</label><input type="file" required="required" name="thumb"/>
+                </div>
+                <div class="form-item">
+                    <label>视频文件：</label><input type="file" required="required" name="video"/>
+                </div>
+                <div class="form-item">
+                    <label>视频时长：</label><input type="input" required="required" placeholder="时长(s)" name="duration"/>
+                </div>
+                <div class="form-item">
+                    <label>审核：</label><input name="status" type="radio" value="1" checked="checked" />直接发布 <input name="status" type="radio" value="0"  />进入审核 
+                </div>
+                <div class="form-item">
+                    <input type="submit" value="提交" />
+                    <input type="hidden" name="__token__" value="{$__token__}">
+                </div>
+            </form>
+        </div>
+<include file="./Public/widget/footer.html"/>
+<script type="text/javascript">
+    $(function() {
+        $('.country').click(function(e) {
+            var countryNodes = $('.country');
+            var result = "";
+            for (var i = 0; i < countryNodes.length; i++) {
+                var item = countryNodes[i];
+                if (item.checked) {
+                    result += item.value + ",";
+                }
+            }
+            if (result) {
+                result += ",";
+                result = result.replace(",,", "");
+            }
+            $('#country').val(result);
+        });
+
+        $('.country')[0].checked = true;
+    });
+</script>
+<include file="./Public/widget/foot.html"/>

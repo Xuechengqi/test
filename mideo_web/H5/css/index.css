@@ -1,0 +1,246 @@
+html{color:#000;background:#FFF;}
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,pre,form,fieldset,legend,input,textarea,p,blockquote,th,td{margin:0;padding:0;}
+table{border-collapse:collapse;border-spacing:0;}
+fieldset,img{border:0;}
+ul,ol{list-style:none;}
+body,html{font-size:12px;height:100%;width:100%;font-family:Helvetica,arial,nimbussansl,liberationsans,freesans,clean,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";}
+
+#outer{
+    position:absolute;
+    left:0;
+    top:0;
+    width:100%;
+    height:100%;
+}
+
+.top_mideo{
+	/* background:yellow; */
+	width:100%;
+	height:48px;
+}
+.top_mideo .mideo_logo{
+	display:inline-block;
+	width:50%;
+	height:100%;
+	/* background:red; */
+	margin-left:5%;
+}
+.top_mideo .mideo_logo:before{
+	content:".";
+	height:100%;
+	display:inline-block;
+	vertical-align:middle;
+	visibility:hidden;
+}
+.top_mideo .mideo_logo .logo{
+	display:inline-block;
+	width:5.7rem;
+	height:2.7rem;
+	background:url('../img/icon_mideo.png');
+	background-size:cover;
+	vertical-align:middle;
+}
+.top_mideo .mideo_logo span{
+	font-size:1.4rem;
+	font-weight:bold;
+	color:#404040;
+	margin-left:4%;
+	vertical-align:middle;
+}
+.top_mideo .icon{
+	display:inline-block;
+	width:44%;
+	height:100%;
+	/* background:green; */
+}
+.top_mideo .icon:before{
+	content:".";
+	width:48%;
+	height:100%;
+	display:inline-block;
+	vertical-align:middle;
+	visibility:hidden;
+}
+.top_mideo .like{
+	display:inline-block;
+	width:1.5rem;
+	height:1.5rem;
+	background:url('../img/icon_discovery.png');
+	background-size:cover;
+	vertical-align:middle;
+	margin-right:0.4rem;
+}
+.top_mideo .add_friends{
+	display:inline-block;
+	width:1.5rem;
+	height:1.5rem;
+	background:url('../img/icon_add_person.png');
+	background-size:cover;
+	vertical-align:middle;
+}
+
+.header{
+    /* background:black; */
+    width:100%;
+    height:48px;
+    top:48px;
+    background-color: #FFF;
+}
+.top_nav{
+	width:100%;
+    height:100%;
+}
+.top_nav .item{
+	/* background:pink; */
+	width:50%;
+	height:100%;
+	display:inline-block;
+	/* position:relative; */
+	text-align:center;
+}
+.top_nav .item .nav_title{
+    width:68%;
+    height:92%;
+    margin:0 auto;
+}
+.top_nav .item .nav_title:before{
+	content:".";
+	height:100%;
+	display:inline-block;
+	vertical-align:middle;
+	visibility:hidden;
+}
+.item .nav_title span{
+	font-size:1.4rem;
+    font-weight:bold;
+    color:#404040;
+	vertical-align:middle;
+}
+.top_nav .pro{
+	background:orange;
+	width:100%;
+	height:8%;
+}
+.item .nav_title .changeColor{
+    color:#9a9a9a;
+}
+
+.content{
+    background-color: #f00;
+    /* border:1px solid red; */
+    height:78%;/*改*/
+    top:0;
+    bottom:48px;
+    position:relative;
+}
+.list{
+    display:flex;
+    height:150%;
+    overflow:hidden;
+}
+.content .list_0{
+    
+}
+.content .list_1{
+    
+}
+
+.fade{
+    display:none;
+}
+
+.footer{
+    /* background:blue; */
+    position:fixed;
+    height:48px;
+    width:100%;
+    bottom:0;
+}
+.footer .container{
+    width:97%;
+    height:100%;
+    margin:0 auto;
+    z-index:1;
+}
+.footer .container:before{
+    content:".";
+    height:100%;
+    display:inline-block;
+    vertical-align:middle;
+    visibility:hidden;
+}
+.footer a div{
+    display:inline-block;
+    width:2rem;
+    height:2rem;
+    vertical-align:middle;
+}
+.footer .icon_home{
+    background:url('../img/icon_home_hover.png');
+    background-size:cover;
+    margin-right:9.5%;
+}
+.footer .icon_find{
+    background:url('../img/icon_find.png');
+    background-size:cover;
+    margin-left:4.5%;
+    margin-right:8%;
+}
+.footer .icon_camera{
+    width:3rem;
+    height:3rem;
+    background:url('../img/icon_camera.png');
+    background-size:cover;
+}
+.footer .icon_news{
+    background:url('../img/icon_news.png');
+    background-size:cover;
+    margin-left:8%;
+    margin-right:4.5%;
+}
+.footer .icon_center{
+    background:url('../img/icon_center.png');
+    background-size:cover;
+    margin-left:9.5%;
+}
+
+@media all and (orientation : portrait){
+    .footer .container{
+        width:97%;
+        margin:0 auto;
+    }
+}
+@media all and (orientation : landscape){
+    .footer .container{
+        width:45%;
+        margin:0 auto;
+    }
+}
+@media only screen and (min-width:320px) and (orientation:portrait){
+	html{font-size:12px;}
+}
+@media only screen and (min-width:360px) and (orientation:portrait){
+	html{font-size:16px;}
+}
+@media only screen and (min-width:400px) and (orientation:portrait){
+	html{font-size:18px;}
+}
+@media only screen and (min-width:600px) and (orientation:portrait){
+	html{font-size:24px;}
+}
+
+@media only screen and (min-width:480px) amd (orientation:landscape){
+	html{font-size:12px;}
+}
+@media only screen and (min-width:580px) and (orientation:landscape){
+	html{font-size:13px;}
+}
+@media only screen and (min-width:730px) and (orientation:landscape){
+	html{font-size:16px;}
+}
+@media only screen and (min-width:900px) and (orientation:landscape){
+	html{font-size:21px;}
+}
+@media only screen and (min-width:992px){
+	html{font-size:24px;}
+}

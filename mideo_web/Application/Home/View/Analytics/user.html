@@ -1,0 +1,27 @@
+<include file="./Public/widget/head.html" title="统计管理——Mideo管理员管理系统" keywords="Mideo"/>
+<link rel="stylesheet" type="text/css" href="__CSS__/index.css">
+<link rel="stylesheet" type="text/css" href="__CSS__/admin.css">
+<script src="__JS__/jquery.js"></script>
+<include file="./Public/widget/header.html"/>
+        <include file="./Public/widget/topheader.html"/>
+        <ul id="side" class="side">
+            <include file="./Public/widget/leftnav.html"/>
+        </ul>
+        <div class="content">
+            <include file="./Public/widget/nav/a_video.html"/>
+            <div class="row">
+                <div class="range-nav">
+                    <a href="__ACTION__/a_type/{$a_type}/dateRange/last_30_days">过去30天</a>
+                    <a href="__ACTION__/a_type/{$a_type}/dateRange/last_7_days">过去7天</a>
+                    <a href="__ACTION__/a_type/{$a_type}/dateRange/this_month">这个月</a>
+                    <a href="__ACTION__/a_type/{$a_type}/dateRange/last_month">上个月</a>
+                </div>
+                <a class="btn btn-success" target="_blank" href="__CONTROLLER__/updateAnalytics/type/video/subtype/{$a_type}">更新统计数据</a>
+            </div>
+            <div id="main" style="width: 100%;height:600px;margin-top: 20px;margin-bottom: 20px;"></div>
+        </div>
+<include file="./Public/widget/footer.html"/>
+    <script type="text/javascript">
+       
+    </script>
+<include file="./Public/widget/foot.html"/>

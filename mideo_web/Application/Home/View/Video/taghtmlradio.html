@@ -1,0 +1,14 @@
+<div style="min-height:100px;">
+<label for="male">标签：</label>
+<?php $no = true; ?>
+<volist name="tag_list" id="tag">
+<?php if($tag['rid']): ?>
+    <?php $no = false; ?>
+    <span><input type="radio" name="tag" value="{$tag.id}" /> {$tag.title}</span>
+<?php else : ?>
+    <span><input type="radio" name="tag" value="{$tag.id}" /> {$tag.title}</span>
+<?php endif; ?>
+</volist>
+<?php if($no) echo "暂无标签，请先添加标签。" ;?>
+
+</div>

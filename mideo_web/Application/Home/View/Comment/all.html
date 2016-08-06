@@ -1,0 +1,74 @@
+<include file="./Public/widget/head.html" title="评论管理——Mideo管理员管理系统" keywords="Mideo"/>
+<link rel="stylesheet" type="text/css" href="__CSS__/index.css">
+<link rel="stylesheet" type="text/css" href="__CSS__/admin.css">
+<include file="./Public/widget/header.html"/>
+        <include file="./Public/widget/topheader.html"/>
+        <ul id="side" class="side">
+            <include file="./Public/widget/leftnav.html"/>
+        </ul>
+        <div class="content">
+            <include file="./Public/widget/nav/comment.html"/>
+            <table class="table table-border mt20">
+                <thead>
+                    <tr>
+                        <th>评论ID</th>
+                        <th>评论内容</th>
+                        <th>评论用户</th>
+                        <th>评论时间</th>
+                        <th>视频ID</th>
+                        <th>分类</th>
+                        <th>描述</th>
+                        <th>时长(秒)</th>
+                        <th>大小</th>
+                        <th>上传时间</th>
+                        <th>删除</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <volist name="list" id="item">
+                    <tr>
+                        <td>{$item.id}</td>
+                        <td>{$item.content}</td>
+                        <td>({$item.userid}){$item.username}</td>
+                        <td>{$item.createtime|date='Y-m-d H:i:s',###}</td>
+                        <td><a title="点击播放" href="__CONTROLLER__/play/id/{$item.videoid}">{$item.videoid}</a></td>
+                        <td>{$item.catename}</td>
+                        <td>{$item.description|cutStr=###, 20}</td>
+                        <td>{$item.duration}</td>
+                        <td>{$item.size|formatBytes}</td>
+                        <td>{$item.videocreatetime|date='Y-m-d H:i:s',###}</td>
+                        <td><input class="js_delete btn btn-danger" data-id="{$item.id}" type="button" value="删除" /></td>
+                    </tr>
+                    </volist>
+                </tbody>
+            </table>
+            <div class="pager">{$page}</div>
+        </div>
+<include file="./Public/widget/footer.html"/>
+<script type="text/javascript">
+    $(function() {
+        initEvent();
+    });
+
+    function initEvent() {
+        $('.js_delete').click(function(e) {
+            if (confirm("确认删除？")) {
+                var id = $(this).attr('data-id');
+                $.ajax({
+                    dataType:'json',
+                    url: '__CONTROLLER__/action_delete/id/' + id
+                }).done(function(data) {
+                    if (data.code == 200) {
+                        window.location.reload();
+                    } else {
+                        alert(data.msg);
+                    }
+                }).fail(function(msg) {
+                    console.error(msg);
+                    alert('操作失败');
+                });
+            }
+        });
+    }
+</script>
+<include file="./Public/widget/foot.html"/>

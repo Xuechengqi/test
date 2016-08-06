@@ -1,0 +1,100 @@
+<include file="./Public/widget/head.html" title="添加系统消息——Mideo管理员管理系统" keywords="Mideo"/>
+<link rel="stylesheet" type="text/css" href="__CSS__/index.css">
+<link rel="stylesheet" type="text/css" href="__CSS__/admin.css">
+<include file="./Public/widget/header.html"/>
+        <include file="./Public/widget/topheader.html"/>
+        <ul id="side" class="side">
+            <include file="./Public/widget/leftnav.html"/>
+        </ul>
+        <div class="content">
+            <include file="./Public/widget/nav/msg.html"/>
+            <form action="__CONTROLLER__/action_add" class="form" enctype="multipart/form-data" method="post">
+                <div class="form-item">
+                    <label>国家：</label><volist name="allowCountry" id="country"><label><input type="checkbox" class="country" value="{$country}">{$country|getCountryName}</label>&nbsp;&nbsp;&nbsp;</volist>
+                    <input type="hidden" name="country" id="country" required="required" value="BR" />
+                </div>
+                <div class="form-item">
+                    <label style="vertical-align: top;">标题：</label>
+                    <input type="text" name="title" />
+                </div>
+                <div class="form-item">
+                    <label style="vertical-align: top;">内容：</label>
+                    <div style="width:800px;height: 300px;display: inline-block;">
+                        <!-- <div id="em"></div>
+                        <div id="text" style="width:600px;height: 200px;display: inline-block;border: 1px solid #aaa"  contenteditable="true"></div> -->
+                        <textarea style="width:600px;height: 200px;display: inline-block;" id="content" name="content"></textarea>
+                    </div>
+                    
+                    <!-- <script id="container" name="content" style="width:800px;height: 300px;margin-left: 54px;margin-top: -25px;" type="text/plain"></script> -->
+                </div>
+                <div class="form-item">
+                    <input type="submit" value="提交" />
+                </div>
+            </form>
+        </div>
+<include file="./Public/widget/footer.html"/>
+<script type="text/javascript" src="__PUBLIC__/emoji/Iemoji.js"></script>
+<script type="text/javascript">
+
+$(function() {
+
+    // var d = Iemoji({
+    //     el:$("#em"),
+    //     input:$("#text")
+    // });
+    // 
+    var decToHex = function(str) {
+        var res=[];
+        for(var i=0;i < str.length;i++)
+            res[i]=("00"+str.charCodeAt(i).toString(16)).slice(-4);
+        return "\\u"+res.join("\\u");
+    }
+    var hexToDec = function(str) {
+        str=str.replace(/\\/g,"%");
+        return unescape(str);
+    }
+
+    console.log(decToHex('0x1f600'));
+
+    var str=decToHex("decToHex unicode 编码转换");
+    //alert("编码后："+str+"\n\n解码后："+hexToDec(str));
+
+    $("#text").focusout(function() {
+        var s = d.content();
+        var dom =$("<p>"+s+"</p>");
+        $.map( dom.find("img"), function(n){
+            var code = $(n).attr("data-code");
+            $(n).replaceWith("[mideo]"+code+"[/mideo]");
+        });
+        $("#content").val(dom.html())
+        //console.log(dom.html())
+    });
+
+
+
+    
+    
+
+
+
+
+    $('.country').click(function(e) {
+        var countryNodes = $('.country');
+        var result = "";
+        for (var i = 0; i < countryNodes.length; i++) {
+            var item = countryNodes[i];
+            if (item.checked) {
+                result += item.value + ",";
+            }
+        }
+        if (result) {
+            result += ",";
+            result = result.replace(",,", "");
+        }
+        $('#country').val(result);
+    });
+
+    $('.country')[0].checked = true;
+});
+</script>
+<include file="./Public/widget/foot.html"/>

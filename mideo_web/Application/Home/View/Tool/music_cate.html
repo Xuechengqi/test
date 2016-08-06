@@ -1,0 +1,135 @@
+<include file="./Public/widget/head.html" title="话题管理——Mideo管理员管理系统" keywords="Mideo"/>
+<link rel="stylesheet" type="text/css" href="__CSS__/index.css">
+<link rel="stylesheet" type="text/css" href="__CSS__/admin.css">
+<include file="./Public/widget/header.html"/>
+        <include file="./Public/widget/topheader.html"/>
+        <ul id="side" class="side">
+            <include file="./Public/widget/leftnav.html"/>
+        </ul>
+        <div class="content">
+            <include file="./Public/widget/nav/tool.html"/>
+            <p class="mt20">国家：
+            <select id="country">
+                <volist name="allcountry" id="citem">
+                <if condition="$key eq $country">
+                <option value="{$key}" selected="selected">{$citem}</option>
+                <else/>
+                <option value="{$key}">{$citem}</option>
+                </if>
+                </volist>
+            </select>  <input class="js_add btn btn-success" type="button" value="添加分类" /></p>
+            <table class="table table-border mt20">
+                <thead>
+                    <tr>
+                        <th>分类ID</th>
+                        <th>国家</th>
+                        <th>分类名</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <volist name="list" id="item">
+                    <tr>
+                        <td>{$item.id}</td>
+                        <td>{$item.country}({$item.country|getCountryName})</td>
+                        <td>{$item.name}</td>
+                        <td><input class="js_delete btn btn-danger" data-id="{$item.id}" type="button" value="删除" /></td>
+                    </tr>
+                    </volist>
+                </tbody>
+            </table>
+            <div class="pager">{$page}</div>
+        </div>
+<include file="./Public/widget/footer.html"/>
+
+<div id="test" style="display: none;"><label for="male">分类名称：</label><input name="name" value="" /></div>
+
+<div id="to_del" style="display: none;"><label for="male">移动到：</label>
+    <select><volist name="cate_list" id="vo">
+            <option value="{$vo.id}">{$vo.name}</option>
+            </volist>
+    </select>
+</div>
+<script type="text/javascript" src="__JS__/Idialog.js"></script>
+
+
+<script type="text/javascript">
+$(function() {
+    initEvent();
+});
+
+function initEvent() {
+    $('#country').change(function(e) {
+        var $country = $(this).val();
+        window.location.href = "__ACTION__/country/" + $country;
+    });
+
+
+    $('.js_delete').click(function(e) {
+        var id = $(this).attr('data-id');
+
+        var s = Idialog({
+            top:200,
+            width:300,
+            title:"移动音乐并删除分类",
+            content:$('#to_del'),
+            init:function(body){
+            },
+            ok:function(obj){
+                var new_id = obj._self.find("select").val();
+         
+                $.ajax({
+                    dataType:'json',
+                    url: '__CONTROLLER__/action_mcate_delete/id/'+id+'/new_id/'+new_id
+                }).done(function(data) {
+                    if (data.code == 200) {
+                        window.location.reload();
+                    } else {
+                        alert(data.msg);
+                    }
+                }).fail(function(msg) {
+                    console.error(msg);
+                    alert('操作失败');
+                });
+                return true;
+            },
+            cancel:false
+        });
+    });
+}
+
+
+$(".js_add").click(function(){
+
+    var country = $('#country').val(); 
+     
+    var d = Idialog({
+        top:200,
+        width:300,
+        title:"添加分类",
+        content:$('#test'),
+        init:function(body){
+        },
+        ok:function(obj){
+            var name = obj._self.find("input").val();
+     
+            $.ajax({
+                dataType:'json',
+                url: '__CONTROLLER__/action_mcate_add/name/' + name + '/country/' + country
+            }).done(function(data) {
+                if (data.code == 200) {
+                    window.location.reload();
+                }
+                alert(data.msg);
+            }).fail(function(msg) {
+                alert('操作失败');
+            });
+            return true;
+        },
+        cancel:false
+    });
+   
+});
+
+</script>
+<include file="./Public/widget/foot.html"/>

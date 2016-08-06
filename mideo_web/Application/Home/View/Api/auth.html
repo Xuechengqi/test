@@ -1,0 +1,54 @@
+<include file="./Public/widget/head.html" title="Api——Mideo管理员管理系统" keywords="Mideo"/>
+<link rel="stylesheet" type="text/css" href="__CSS__/index.css">
+<link rel="stylesheet" type="text/css" href="__CSS__/admin.css">
+<include file="./Public/widget/header.html"/>
+        <include file="./Public/widget/topheader.html"/>
+        <ul id="side" class="side">
+            <include file="./Public/widget/leftnav.html"/>
+        </ul>
+        <div class="content">
+            <include file="./Public/widget/nav/api.html"/>
+            <p class="mt20 mb20">baseurl: {$null|getApiBaseUrl}/auth/&nbsp;&nbsp;token<span class="tcred">(所有API请求必须添加此参数)</span>: {$null|getToken}</p>
+            <table class="table table-border">
+                <thead>
+                    <tr>
+                        <th>api</th>
+                        <th>参数</th>
+                        <th>返回值</th>
+                        <th>备注</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><a href="{$null|getApiBaseUrl}/auth/gettoken/appid/hwmideoand/secret/bf1ec5ae11f8fdf9a95b7" target="_blank">gettoken</a></td>
+                        <td>appid(<span class="tcred">必须</span>)<br/>secret(<span class="tcred">必须</span>)</td>
+                        <td><pre class="apicode">
+{
+    "code":200,
+    "message":"",
+    "data":{
+        "access_token":"245xcoqi0k6lzc1r4tlxozfa7h2m62r0",
+        "expires_in":3600
+    }
+}</pre></td>
+                        <td>获取Token</td>
+                    </tr>
+                    <tr>
+                        <td><a href="{$null|getApiBaseUrl}/im/gettoken" target="_blank">gettoken</a></td>
+                        <td>
+                        userid(<span class="tcred">必须</span>)<br/>
+                        name(<span class="tcred">必须</span>)<br/>
+                        photo(头像URI)</td>
+                        <td><pre class="apicode">
+{
+    "code": 200,
+    "userId": "1",
+    "token": "6EQgmy0KYre0J1IFAXyB9fCkxJMbSxTVOqg3BKT5SrX7Fb/dhhU4X47Fsr12oAvJGP+/jMtJw45oX0v49sYB3Q=="
+}</pre></td>
+                        <td>获取融云Token</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+<include file="./Public/widget/footer.html"/>
+<include file="./Public/widget/foot.html"/>

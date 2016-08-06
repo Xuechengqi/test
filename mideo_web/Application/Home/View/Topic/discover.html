@@ -1,0 +1,121 @@
+<include file="./Public/widget/head.html" title="视频管理——Mideo管理员管理系统" keywords="Mideo"/>
+<link rel="stylesheet" type="text/css" href="__CSS__/index.css">
+<link rel="stylesheet" type="text/css" href="__CSS__/admin.css">
+
+<link rel="stylesheet" type="text/css" href="__CSS__/pikaday.css"/>
+<script type="text/javascript" src="__JS__/jquery.js"></script>
+<script type="text/javascript" src="__JS__/pikaday.min.js"></script>
+
+<include file="./Public/widget/header.html"/>
+        <include file="./Public/widget/topheader.html"/>
+        <ul id="side" class="side">
+            <include file="./Public/widget/leftnav.html"/>
+            
+        </ul>
+        <div class="content">
+            <include file="./Public/widget/nav/topic.html"/>
+            <div style="margin:5px;">开始时间：<input type="text" value="{$_GET['stime']}" id="stime" /> —— 截止时间：<input type="text" value="{$_GET['etime']}" id="etime" /> <input class="btn btn-success" id="search" type="button" value="搜索"></div>
+            
+            <table class="table table-border mt20">
+                <thead>
+                    <tr>
+                        <th>话题ID</th>
+                        <th>国家<select class="table-header-select">
+                        <option value="">ALL</option>
+                        <volist name="allowCountry" id="country"><option <if condition="$Think.get.country eq $country">selected='selected'</if> value="{$country}">{$country|getCountryName}</option></volist>
+                        </select></th>
+                        <th>话题标题</th>
+                        <th>话题图片</th>
+                        <th class="ord" data-col="p_num">参与人数<if condition="$Think.get.ord eq p_num ">↓</if></th>
+                        <th class="ord" data-col="v_num">参与视频数<if condition="$Think.get.ord eq v_num ">↓</if></th>
+                        <th>添加时间</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <volist name="list" id="item">
+                    <tr>
+                        <td>{$item.id}</td>
+                        <td>{$item.country|getCountryName}</td>
+                        <td><a href="__CONTROLLER__/video_list/id/{$item.id}">{$item.title}</a></td>
+                        <td><img style="max-width:100px;max-height: 100px;" src="{$null|getBaseUrl}/uploads/{$item.picture}" alt=""/></td>
+                        <td>{$item.p_num}</td>
+                        <td>{$item.v_num}</td>
+                        <td>{$item.createtime|date='Y-m-d H:i:s',###}</td>
+                    </tr>
+                    </volist>
+                </tbody>
+            </table>
+            <div class="pager">{$page}</div>
+        </div>
+<include file="./Public/widget/footer.html"/>
+<include file="./Public/widget/foot.html"/>
+<script type="text/javascript">
+
+    var spicker = new Pikaday(
+    {
+        field: document.getElementById('stime'),
+        firstDay: 1,
+        minDate: new Date('2010-01-01'),
+        maxDate: new Date('2020-12-31'),
+        yearRange: [2000,2020]
+    });
+
+    var epicker = new Pikaday(
+    {
+        field: document.getElementById('etime'),
+        firstDay: 1,
+        minDate: new Date('2010-01-01'),
+        maxDate: new Date('2020-12-31'),
+        yearRange: [2000,2020]
+    });
+
+
+
+    $(function(){
+        $("#search").click(function(){
+            if($("#stime").val()=='' || $("#etime").val()==''){
+                alert("查询时间未输入");
+                return false;
+            }
+            var url = '__CONTROLLER__/discover/stime/'+$("#stime").val()+'/etime/'+$("#etime").val();
+            window.location.href = url;
+        });
+
+
+        $(".ord").click(function(){
+            var col = $(this).attr("data-col");
+            var o_stime='{$_GET["stime"]}';
+            var o_etime='{$_GET["etime"]}';
+
+            var url = '__CONTROLLER__/discover/ord/'+col;
+            if(o_stime!=''){
+                url+='/stime/'+o_stime+'/etime/'+o_etime;
+            }
+            
+            var country='{$_GET["country"]}';
+            if(country!=''){
+                url+='/country/'+country;
+            }
+            window.location.href = url;
+        });
+
+        $(".table-header-select").change(function(){
+            var country = $(this).val();
+
+            var col = '{$_GET["col"]}';
+            var o_stime='{$_GET["stime"]}';
+            var o_etime='{$_GET["etime"]}';
+
+            var url = '__CONTROLLER__/discover/country/'+country;
+            if(o_stime!=''){
+                url+='/stime/'+o_stime+'/etime/'+o_etime;
+            }
+            if(col!=''){
+                url+='/ord/'+col;
+            }
+            window.location.href = url;
+        });
+
+    });
+
+</script>

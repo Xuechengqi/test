@@ -1,0 +1,33 @@
+<include file="./Public/widget/head.html" title="评论管理——Mideo管理员管理系统" keywords="Mideo"/>
+<link rel="stylesheet" type="text/css" href="__CSS__/index.css">
+<link rel="stylesheet" type="text/css" href="__CSS__/admin.css">
+<include file="./Public/widget/header.html"/>
+        <include file="./Public/widget/topheader.html"/>
+        <ul id="side" class="side">
+            <include file="./Public/widget/leftnav.html"/>
+        </ul>
+        <div class="content">
+            <include file="./Public/widget/nav/comment.html"/>
+            <form action="{$null|getApiBaseUrl}/comment/add" class="form" method="post">
+                <div class="form-item">
+                    <label>视频UUID：</label><input type="text" required="required" placeholder="一个36字符长度的字符串" name="videoid"/>
+                </div>
+                <div class="form-item">
+                    <label>用户ID：</label><input type="text" required="required" placeholder="userid(数字)" name="userid"/>
+                </div>
+                <div class="form-item">
+                    <label>用户名称：</label><input type="text" required="required" placeholder="username" name="username"/>
+                </div>
+                <div class="form-item">
+                    <label>评论内容：</label><input type="text" required="required" placeholder="评论内容" value="" name="content"/>
+                </div>
+                <div class="form-item">
+                    <label>@用户IDs：</label><input type="text" required="required" placeholder="@用户IDs" value="1,2,3,4" name="atuserids"/>
+                </div>
+                <div class="form-item">
+                    <input type="submit" value="提交" />
+                </div>
+            </form>
+        </div>
+<include file="./Public/widget/footer.html"/>
+<include file="./Public/widget/foot.html"/>
