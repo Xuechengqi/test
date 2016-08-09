@@ -1,0 +1,64 @@
+html{color:#000;background:#FFF;}
+html,body,div,dl,dt,dd,ul,h1,h2,h3,pre,form,label,fieldset,input,p,blockquote,th,td{margin:0;padding:0;}
+table{border-collapse:collapse;border-spacing:0;}
+fieldset,img{border:0;}
+ul,ol{list-style:none;}
+body,html{font-size:12px;height:100%;width:100%;font-family:Helvetica,arial,nimbussansl,liberationsans,freesans,clean,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";}
+
+.tab_header{width:100%;height:8%;}
+.tab_header .items{width:100%;height:94%;}
+.tab_header .item{display:inline-block;width:50%;height:100%;text-align:center;background-color:pink;}
+.tab_header .item_title{width:100%;height:100%;}
+.tab_header .item_title:before{content:".";height:100%;display:inline-block;vertical-align:middle;visibility:hidden;}
+.tab_header .item_title span{vertical-align:middle;font-size:2rem;font-weight:bold;}
+.tab_header .prcsswrap{width:100%;height:6%;background-color:#fff;}
+.prcsswrap .prcss{width:50%;height:100%;background-color:red;position:relative;}
+
+.slides{width:100%;height:92%;overflow:hidden;}
+.content{width:200%;height:100%;position:relative;}
+.content .details{width:50%;height:auto;float:left;}
+.content .guidance{background-color:blue;}
+.content .question{background-color:green;}
+.details .detail{height:auto;}
+.detail_title{height:4rem;line-height:4rem;vertical-align:middle;padding:0 1rem;}
+.detail_title img{width:2rem;height:2rem;vertical-align:middle;margin-right:1rem;}
+.detail_title label{font-size:1.8rem;vertical-align:middle;}
+.detail_title span{float:right;height:4rem;line-height:4rem;margin-right:1rem;}
+.detail_cont{font-size:1rem;background-color:yellow;height:0;position:relative;overflow:hidden;-webkit-transition:height 0.3s;-moz-transition:height 0.3s;transition:height 0.3s;}
+.detail_cont .cont_wrap{position:absolute;bottom:0;}
+.fade{visibility:hidden;}
+
+@media all and (orientation : portrait){
+
+}
+@media all and (orientation : landscape){
+
+}
+@media only screen and (min-width:320px) and (orientation:portrait){
+	html{font-size:12px;}
+}
+@media only screen and (min-width:360px) and (orientation:portrait){
+	html{font-size:16px;}
+}
+@media only screen and (min-width:400px) and (orientation:portrait){
+	html{font-size:18px;}
+}
+@media only screen and (min-width:600px) and (orientation:portrait){
+	html{font-size:24px;}
+}
+
+@media only screen and (min-width:480px) and (orientation:landscape){
+	html{font-size:12px;}
+}
+@media only screen and (min-width:580px) and (orientation:landscape){
+	html{font-size:13px;}
+}
+@media only screen and (min-width:730px) and (orientation:landscape){
+	html{font-size:16px;}
+}
+@media only screen and (min-width:900px) and (orientation:landscape){
+	html{font-size:21px;}
+}
+@media only screen and (min-width:992px){
+	html{font-size:24px;}
+}

@@ -1,10 +1,142 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>mideo school</title>
+    <meta charset="UTF-8">
+    <title>mideo school</title>
+    <link rel="stylesheet" href="./index/css/help.css" />
 </head>
 <body>
-	
+    <div class="tab_header">
+        <div class="items">
+            <div class="item" id="guidance">
+                <div class="item_title"><span>新手宝典</span></div>
+            </div><div class="item" id="question">
+                <div class="item_title"><span>常见问题</span></div>
+            </div>
+        </div>
+        <div class="prcsswrap">
+            <div class="prcss"></div>
+        </div>
+    </div>
+    <div class="slides">
+        <div class="content">
+            <div class="details guidance">
+                <div class="detail">
+                    <div class="detail_title title_0 display" data-rel="cont_0" data-index="0">
+                        <img src="./index/img/bulb.svg" alt="">
+                        <label>如何使用mideo</label>
+                        <span class="arrow fade"><img src="./index/img/arrow.svg" alt=""></span>
+                    </div>
+                    <div class="detail_cont cont_0"><div class="cont_wrap">如何使用mideo如何使用mid,eo如何使用mid,eo如何使,用mideo如何使用mideo如何使用mideo,如何使用mideo如何使用mideo如何使用mideo如何使用,mideo如何使用mideo如何使,用mideo如何,使用mideo如何使用mideo如何使用mideo</div></div>
+                </div>
+                <div class="detail">
+                    <div class="detail_title title_1 display" data-rel="cont_1" data-index="1">
+                        <img src="./index/img/bulb.svg" alt="">
+                        <label>如何使用mideo</label>
+                        <span class="arrow fade"><img src="./index/img/arrow.svg" alt=""></span>
+                    </div>
+                    <div class="detail_cont cont_1"><div class="cont_wrap">如何使用mideo如何使用mid,eo如何使用mid,eo如何使,用mideo如何使用mideo如何使用mideo,如何使用mideo如何使用mideo如何使用mideo如何使用,mideo如何使用mideo如何使,用mideo如何,使用mideo如何使用mideo如何使用mideo</div></div>
+                </div>
+            </div>
+            <div class="details question">
+                
+            </div>
+        </div>
+    </div>
 </body>
+<script src="./index/js/jquery-2.2.2.min.js"></script>
+<script>
+    $(function(){
+        var inner = $('.prcss');
+        var outer = $('.prcsswrap');
+        var PREV = 0;//上一个details索引
+        var CURRENT = 0;//当前details索引
+        var WIDTH = $('.details').width();//content宽度，位移单位
+        $('#question').click(function(){
+            var inner_right = inner.offset().left + inner.width();
+            animation(inner[0],'left',inner.offset().left,inner_right);
+            PREV = 0;
+            CURRENT = 1;
+            slide();
+        });
+        $('#guidance').click(function(){
+            animation(inner[0],'left',inner.offset().left,outer.offset().left);
+            PREV = 1;
+            CURRENT = 0;
+            slide();
+        });
+        $('.detail_title').click(function(e){
+            var index = e.target.getAttribute("data-index");
+            var className = $('.title_' + index)[0].className;
+            var display = !(className.indexOf('display') !== -1);
+            //detail的个数
+            var countDetail = $('.detail').length;
+            if(display){
+                $('.title_' + index).addClass('display');
+                //箭头的隐藏和显示
+                $('.title_' + index + ' .arrow').addClass('fade');
+            }else{
+                $('.title_' + index).removeClass('display');
+                //箭头的隐藏和显示
+                $('.title_' + index + ' .arrow').removeClass('fade');
+                for(var i = 0; i < countDetail; i ++){
+                    if(i != index){
+                        if(!($('.title_' + i)[0].className.indexOf('display') !== -1)){
+                            $('.title_' + i).addClass('display');
+                            slideToggleTrans($('.title_' + i)[0],true);
+                            //箭头的隐藏和显示
+                            $('.title_' + i + ' .arrow').addClass('fade');
+                        }
+                    }
+                }
+            }
+            slideToggleTrans(e.target,display);
+        });
+
+        //tab切换位移动画
+        var animation = function(ele,attr,from,to){
+            var distance = Math.abs(to - from);
+            var stepLength = distance/100;
+            var sign = (to - from)/distance;
+            var offset = 0;
+            var step = function(){
+                var tmpOffset = offset + stepLength;
+                if(tmpOffset < distance){
+                    ele.style[attr] = from + tmpOffset * sign + 'px';
+                    offset = tmpOffset;
+                }else{
+                    ele.style[attr] = to + 'px';
+                    clearInterval(intervalID);
+                }
+            }
+            ele.style[attr] = from + 'px';
+            var intervalID = setInterval(step, 3);
+        };
+
+        //details切换动画
+        var slide = function(){
+            var from = -PREV*WIDTH;
+            var to = -CURRENT*WIDTH;
+            animation($('.content')[0],'left',from,to);
+        }
+
+        //内容展开动画
+        var slideToggleTrans = function(ele,display){
+            //display表示展开元素的显示状态
+            display = !display;
+            var rel = ele.getAttribute("data-rel");
+            var eleMore = document.querySelector("." + rel);
+            eleMore && (eleMore.style.height = display?(function(){
+                var height = 0;
+                Array.prototype.slice.call(eleMore.childNodes).forEach(function(child){
+                    if(child.nodeType === 1){
+                        var oStyle = window.getComputedStyle(child);
+                        height = child.clientHeight + (parseInt(oStyle.borderTopWidth) || 0) + (parseInt(oStyle.borderBottomWidth) || 0);
+                    }
+                });
+                return height;
+            })() + "px" : "0px");
+        }
+    });
+</script>
 </html>
